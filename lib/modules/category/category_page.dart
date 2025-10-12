@@ -18,7 +18,11 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
-          (context) => CategoryCubit(id: id, repo: context.read<ShopRepo>()),
+          (context) => CategoryCubit(
+            id: id,
+            repo: context.read<ShopRepo>(),
+            initial: initial,
+          ),
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
           return Scaffold(
@@ -45,26 +49,28 @@ class CategoryPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 17),
-                Expanded(
-                  child: GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: state.products.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 26,
-                      // mainAxisExtent: MediaQuery.of(context).size.height * 0.43,
-                      childAspectRatio: 1.1 / 2,
+                state.loading
+                    ? Center(child: CircularProgressIndicator())
+                    : Expanded(
+                      child: GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: state.products.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 26,
+                          // mainAxisExtent: MediaQuery.of(context).size.height * 0.43,
+                          childAspectRatio: 1.1 / 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ProductCard(
+                            // height: ,
+                            width: 185,
+                            product: state.products[index],
+                          );
+                        },
+                      ),
                     ),
-                    itemBuilder: (context, index) {
-                      return ProductCard(
-                        // height: ,
-                        width: 185,
-                        product: state.products[index],
-                      );
-                    },
-                  ),
-                ),
               ],
             ),
           );

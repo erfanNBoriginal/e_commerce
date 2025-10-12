@@ -63,6 +63,17 @@ class SizeBottomSheet extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(16),
                 itemBuilder: (context, index) {
+                  // print(state.bagItems)
+                  for (var item in state.bagItems) {
+                    print(
+                      '${item.size} ${item.count} ${item.product.title} ${item.color?.a} ${item.color?.g} ${item.color?.b}',
+                    );
+                  }
+                  // print('index');
+                  // print(index);
+                  // print('state.bagItems.length');
+                  // print(state.bagItems.length);
+                  // print(state.)
                   return
                   //  Container(color: Colors.red, width: 22, height: 22);
                   // temp.size == widget.product.sizes[index]
@@ -72,6 +83,8 @@ class SizeBottomSheet extends StatelessWidget {
                           -1
                       ? NotSelectedButton(
                         onPressed: () {
+                          print('index');
+                          print(index);
                           // print(temp!.product.title);
 
                           // selectedSize = widget.product.sizes[index];
@@ -105,6 +118,8 @@ class SizeBottomSheet extends StatelessWidget {
                       )
                       : NotSelectedButton(
                         onPressed: () {
+                          print('index');
+                          print(index);
                           bagCubit.onSizeSelected(
                             product: product,
                             size: product.sizes[index],

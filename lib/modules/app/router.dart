@@ -12,6 +12,19 @@ final rootNavKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   initialLocation: StrorePage.path,
   navigatorKey: rootNavKey,
+  redirect: (context, state) {
+    print('state.fullPath');
+    print(state.fullPath);
+    print('state.uri.scheme');
+    print(state.uri.scheme);
+    print('state.uri.host');
+    print(state.uri.host);
+    print('state.uri.port');
+    print(state.uri.port);
+    print('state.uri.path');
+    print(state.uri.path);
+    return null;
+  },
   routes: [
     StatefulShellRoute.indexedStack(
       builder:
@@ -33,8 +46,13 @@ final router = GoRouter(
                   path: ProductInfoPage.path,
                   name: ProductInfoPage.path,
                   builder:
-                      (context, state) =>
-                          ProductInfoPage(product: state.extra as dynamic),
+                      (context, state) => ProductInfoPage(
+                        id:
+                            state.uri.queryParameters['id'] != null
+                                ? int.parse(state.uri.queryParameters['id']!)
+                                : null,
+                        product: state.extra as dynamic,
+                      ),
                 ),
 
                 // StatefulShellRoute.indexedStack(

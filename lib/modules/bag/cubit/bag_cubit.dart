@@ -6,7 +6,6 @@ import 'package:e_commerce/domains/models/bag_item.dart';
 import 'package:e_commerce/domains/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:meta/meta.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 part 'bag_state.dart';
@@ -21,21 +20,17 @@ class BagCubit extends Cubit<BagState> {
   }
   //////// Functions
 
-  Future<int> check(BagItem item) async {
-    // if (item.count == 0) {
-    //   return -1;
-    // }
+  Future<BagItem?> check(BagItem item) async {
     final repotemp = await _repo.getBagItems();
-    final result = repotemp.indexWhere(
-      (e) =>
-          e.product == item.product &&
-          e.color == item.color &&
-          e.size == item.size,
-      // &&
-      // item.count != 0,
-    );
-    print('checkkk');
-    print(result);
+    final result =
+        repotemp
+            .where(
+              (e) =>
+                  e.product == item.product &&
+                  e.color == item.color &&
+                  e.size == item.size,
+            )
+            .firstOrNull;
     return result;
   }
 
@@ -45,18 +40,18 @@ class BagCubit extends Cubit<BagState> {
   //   final res = _repo.getTempItems();
   //   emit(state.copyWith(bagItems: res, loading: false));
   // }
-  Future<void> onRefresh() async {
-    emit(state.copyWith(loading: true));
-    final resBagItems = await _repo.getBagItems();
-    emit(state.copyWith(bagItems: resBagItems, loading: false));
-  }
+  // Future<void> onRefresh() async {
+  //   // emit(state.copyWith(loading: true));
+  //   // final resBagItems = await _repo.getBagItems();
+  //   // emit(state.copyWith(bagItems: resBagItems, loading: false));
+  // }
 
   void onInit() async {
     emit(state.copyWith(loading: true));
     // final res = _repo.getTempItems();
-    final resBagItems = await _repo.getBagItems();
+    // final resBagItems = await _repo.getBagItems();
     // print(res.length);
-    emit(state.copyWith(bagItems: resBagItems, loading: false));
+    emit(state.copyWith(loading: false));
   }
 
   //
@@ -71,9 +66,9 @@ class BagCubit extends Cubit<BagState> {
       temp.add(BagItem(product: product, color: color));
     }
     emit(state.copyWith(bagItems: temp));
-    print(
-      '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
-    );
+    // print(
+    //   '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
+    // );
     // _repo.addTempItems(state.bagItems);
   }
 
@@ -90,15 +85,16 @@ class BagCubit extends Cubit<BagState> {
     }
 
     emit(state.copyWith(bagItems: temp));
-    print(
-      '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
-    );
+    // print(
+    //   '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
+    // );
     // _repo.addTempItems(state.bagItems);
   }
 
   Future<void> onAddedToCart(BagItem? item) async {
-    final repotemp = _repo.getBagItems();
-    final tempList = [...state.bagItems];
+    emit(state.copyWith(loading: true));
+    List<BagItem> repotemp = await _repo.getBagItems();
+    // final tempList = [...state.bagItems];
     if (item == null) {
       toast('please select size and color');
     } else {
@@ -107,31 +103,35 @@ class BagCubit extends Cubit<BagState> {
       } else {
         final res = await check(item);
         // if (state.bagItems.any(test))
-        // if (res != -1) {
-        final tempitem = tempList.elementAt(res);
-
-        //if (tempitem.count != 0)
-        tempList.removeAt(res);
-        tempList.add(
-          BagItem(
-            product: tempitem.product,
-            color: tempitem.color,
-            size: tempitem.size,
-            count: tempitem.count + 1,
-          ),
-        );
-        print('count ${tempitem.product.title}');
-        print(tempitem.count + 1);
-        print('same product but  more');
-        // } else {
-        //   tempList.add(item);
-        // }
+        if (res != null) {
+          final tempitem = res;
+          //if (tempitem.count != 0)
+          repotemp.remove(res);
+          repotemp.add(
+            BagItem(
+              product: tempitem.product,
+              color: tempitem.color,
+              size: tempitem.size,
+              count: tempitem.count + 1,
+            ),
+          );
+          // emit(state.copyWith(bagItems: repotemp));
+          // repotemp = [...tempList];
+          print('count ${tempitem.product.title}');
+          print(tempitem.count + 1);
+          print('same product but  more');
+        } else {
+          // tempList.add(item);
+          repotemp.add(item);
+        }
         print('state.bagItems.length');
-        emit(state.copyWith(bagItems: tempList));
+        // emit(state.copyWith(bagItems: tempList));
         print(state.bagItems.length);
-        await _repo.addToBag(state.bagItems);
+        await _repo.addToBag(repotemp);
         toast('product added successfully');
       }
     }
+    // await Future.delayed(Duration(seconds: 6));
+    emit(state.copyWith(loading: false));
   }
 }

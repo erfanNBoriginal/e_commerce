@@ -16,6 +16,12 @@ class ShopRepo {
     ];
   }
 
+  Future<Product> getProductById(int id) async {
+    Future.delayed(Duration(milliseconds: 100));
+    final products = await getProducts();
+    return products.firstWhere((e) => e.id == id);
+  }
+
   Future<CategoryData> getCategory(int id) async {
     Future.delayed(Duration(milliseconds: 100));
     final categories = await getCategories();

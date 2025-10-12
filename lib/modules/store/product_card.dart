@@ -29,7 +29,11 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).pushNamed(ProductInfoPage.path, extra: product);
+        GoRouter.of(context).pushNamed(
+          queryParameters: {'id': product.id.toString()},
+          ProductInfoPage.path,
+          extra: product,
+        );
       },
       child: SizedBox(
         height: height,

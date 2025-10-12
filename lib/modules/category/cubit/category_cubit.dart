@@ -20,7 +20,7 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   /////////events
 
-  Future<void> onInit() async {
+  void onInit() async {
     emit(state.copyWith(loading: true));
     final res = await _repo.getCategory(id);
     final resProducts = await _repo.getProducts(id: id);
