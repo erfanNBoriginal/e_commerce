@@ -1,11 +1,14 @@
 import 'package:e_commerce/domains/models/category_data.dart';
 import 'package:e_commerce/domains/shop_repo.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
+import 'package:e_commerce/modules/category/filters_page.dart';
+import 'package:e_commerce/modules/category/sort_btms.dart';
 import 'package:e_commerce/modules/shop/cubit/shop_cubit.dart';
 import 'package:e_commerce/modules/store/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryPage extends StatelessWidget {
   static const String path = '/Category:id';
@@ -25,6 +28,7 @@ class CategoryPage extends StatelessWidget {
           ),
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
+          final categoyCubit = context.read<CategoryCubit>();
           return Scaffold(
             body: Column(
               children: [
@@ -39,10 +43,33 @@ class CategoryPage extends StatelessWidget {
                       children: [
                         U.Image.Icon(image: U.Icons.filter),
                         SizedBox(width: 7),
-                        U.Text('Filters'),
+                        GestureDetector(
+                          onTap: () {
+                            print('idddddddddddddd');
+                            print(id);
+                            GoRouter.of(context).pushNamed(
+                              pathParameters: {'id': id.toString()},
+                              FiltersPage.path,
+                              extra: categoyCubit,
+                            );
+                          },
+                          child: U.Text('Filters'),
+                        ),
                         U.Image.Icon(image: U.Icons.highlow),
                         SizedBox(width: 7),
-                        U.Text('price : highest to lowest'),
+                        GestureDetector(
+                          onTap: () {
+                            SortBottomSheet.show(
+                              context,
+                              categoryCubit: context.read<CategoryCubit>(),
+                            );
+                          },
+                          child: U.Text(
+                            state.selectedSortCategory == ''
+                                ? 'price : highest to lowest'
+                                : state.selectedSortCategory,
+                          ),
+                        ),
                         U.Image.Icon(image: U.Icons.viewList),
                       ],
                     ),

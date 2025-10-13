@@ -14,12 +14,14 @@ class Product {
   final String brand;
   final bool newProduct;
   final int price;
+  final String category;
   final List<Color> colors;
   final CategoryData categoryData;
   final List<String> sizes;
   Product({
+    required this.category,
     this.colors = const [Colors.amber, Colors.red, Colors.blue],
-    this.sizes = const ['xs', 's', 'm', 'l', 'xl'],
+    this.sizes = const ['XS', 'S', 'M', 'L', 'XL'],
     this.newProduct = false,
     this.off,
     required this.id,

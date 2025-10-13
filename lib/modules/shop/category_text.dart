@@ -14,7 +14,7 @@ class CategoryText extends StatelessWidget {
       onTap: () {
         GoRouter.of(
           context,
-        ).pushNamed(CategoryPage.path, pathParameters: {'id': id.toString()});
+        ).goNamed(CategoryPage.path, pathParameters: {'id': id.toString()});
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

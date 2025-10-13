@@ -15,3 +15,4 @@ export './app_bar.dart';
 export './search_input.dart';
 export './pick_star.dart';
 export './bottom_sheet.dart';
+export './range_slider.dart';

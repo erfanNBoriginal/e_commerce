@@ -12,10 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductInfoPage extends StatelessWidget {
   static String path = '/ProductInfoPage';
-
   final Product? product;
   final int? id;
-
   const ProductInfoPage({super.key, this.id, this.product});
 
   @override
@@ -87,7 +85,12 @@ class ProductInfoPage extends StatelessWidget {
                                         width: 138,
                                         child: Row(
                                           children: [
-                                            U.Text('Size'),
+                                            U.Text(
+                                              state.bagItems.isEmpty
+                                                  ? 'Size'
+                                                  : state.bagItems.first.size
+                                                      .toString(),
+                                            ),
                                             Spacer(),
                                             U.Image.Icon(
                                               size: 9,
@@ -122,7 +125,13 @@ class ProductInfoPage extends StatelessWidget {
                                         width: 138,
                                         child: Row(
                                           children: [
-                                            U.Text('Black'),
+                                            U.Text(
+                                              'Black',
+                                              // state.bagItems.isEmpty
+                                              //     ? 'Black'
+                                              //     : state.bagItems.first.color
+                                              //         .toString(),
+                                            ),
                                             Spacer(),
                                             U.Image.Icon(
                                               size: 8,

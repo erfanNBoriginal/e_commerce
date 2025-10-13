@@ -1,11 +1,16 @@
 import 'package:e_commerce/gallery_page.dart';
+import 'package:e_commerce/modules/category/brands.dart';
 import 'package:e_commerce/modules/category/category_page.dart';
+import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
+import 'package:e_commerce/modules/category/filters_page.dart';
 import 'package:e_commerce/modules/home/home.dart';
 import 'package:e_commerce/modules/product_info/product_shell.dart';
 import 'package:e_commerce/modules/shop/shop_page.dart';
 import 'package:e_commerce/modules/product_info/product_info_page.dart';
 import 'package:e_commerce/modules/store/store_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 final rootNavKey = GlobalKey<NavigatorState>();
@@ -13,25 +18,40 @@ final router = GoRouter(
   initialLocation: StrorePage.path,
   navigatorKey: rootNavKey,
   redirect: (context, state) {
+    print('state.topRoute!.name');
+    print(state.topRoute!.name);
     print('state.fullPath');
     print(state.fullPath);
-    print('state.uri.scheme');
-    print(state.uri.scheme);
-    print('state.uri.host');
-    print(state.uri.host);
-    print('state.uri.port');
-    print(state.uri.port);
-    print('state.uri.path');
-    print(state.uri.path);
+    // print('state.uri.scheme');
+    // print(state.uri.scheme);
+    // print('state.uri.host');
+    // print(state.uri.host);
+    // print('state.uri.port');
+    // print(state.uri.port);
+    // print('state.uri.path');
+    // print(state.uri.path);
     return null;
   },
   routes: [
     StatefulShellRoute.indexedStack(
-      builder:
-          (context, state, navigationShell) => HomeShell(
-            hideNavBar: state.topRoute!.name == ProductInfoPage.path,
-            page: navigationShell,
-          ),
+      builder: (context, state, navigationShell) {
+        bool check() {
+          if (state.fullPath!.contains(FiltersPage.path) ||
+              state.fullPath!.contains(ProductInfoPage.path)) {
+            return true;
+          }
+          return false;
+        }
+
+        return HomeShell(
+          hideNavBar: check(),
+          // [
+          // FiltersPage.path,
+          // ProductInfoPage.path,
+          // ].contains(state.topRoute!.name),
+          page: navigationShell,
+        );
+      },
       branches: [
         StatefulShellBranch(
           routes: [
@@ -88,12 +108,62 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  redirect: (context, state) {
+                    print('categoryyyy state.extraaaaaaaaaaaaaaaaaaaa');
+                    print(state.extra);
+                    print(state.pathParameters['id']);
+                    print('state.topRoute!.name');
+                    print(state.topRoute!.name);
+
+                    // return null;
+                  },
                   path: CategoryPage.path,
                   name: CategoryPage.path,
                   builder:
                       (context, state) => CategoryPage(
                         id: int.parse(state.pathParameters['id']!),
                       ),
+                  routes: [
+                    GoRoute(
+                      redirect: (context, state) {
+                        // print('state.extraaaaaaaaaaaaaaaaaaaa');
+                        // print(state.extra);
+                        // print(
+                        //   'state.pathParameters['
+                        //   ']',
+                        // );
+
+                        // print('state.topRoute!.name');
+                        // print(state.topRoute!.name);
+                        print('filter extraddd');
+                        print(state.extra);
+                        // return null;
+                      },
+                      path: FiltersPage.path,
+                      name: FiltersPage.path,
+                      builder:
+                          (context, state) => FiltersPage(
+                            categoryCubit: state.extra as CategoryCubit,
+                            id: int.parse(state.pathParameters['id']!),
+                          ),
+                      routes: [
+                        GoRoute(
+                          redirect: (context, state) {
+                            print('brands id');
+                            print(state.pathParameters['id']);
+                            // return null;
+                          },
+                          path: BrandsPage.path,
+                          name: BrandsPage.path,
+                          builder:
+                              (context, state) => BrandsPage(
+                                id: int.parse(state.pathParameters['id']!),
+                                categoryCubit: state.extra as CategoryCubit,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

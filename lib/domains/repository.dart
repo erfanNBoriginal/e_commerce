@@ -31,6 +31,7 @@ class Repository {
         brand: "H&M",
         image: "assets/images/jeans3.png",
         title: "Relaxed Fit Ripped Jeans",
+        category: "boys",
         ratings: [
           Rating(rating: "Trendy ripped design", stars: 5),
           Rating(rating: "Looks great with sneakers", stars: 4),
@@ -46,6 +47,7 @@ class Repository {
         brand: "Zara",
         image: "assets/images/skirts1.png",
         title: "Pleated Midi Skirt",
+        category: "women",
         ratings: [
           Rating(rating: "Elegant and flowy", stars: 5),
           Rating(rating: "Perfect for office and casual", stars: 4),
@@ -61,6 +63,7 @@ class Repository {
         brand: "H&M",
         image: "assets/images/skirts2.png",
         title: "Denim Mini Skirt",
+        category: "women",
         ratings: [
           Rating(rating: "Trendy and stylish", stars: 4),
           Rating(rating: "Pairs well with sneakers", stars: 5),
@@ -76,6 +79,7 @@ class Repository {
         brand: "Uniqlo",
         image: "assets/images/skirts3.png",
         title: "A-Line Maxi Skirt",
+        category: "women",
         ratings: [
           Rating(rating: "Comfortable and modest", stars: 5),
           Rating(rating: "Great fabric quality", stars: 4),
@@ -91,6 +95,7 @@ class Repository {
         brand: "Zara",
         image: "assets/images/skirts1.png",
         title: "Pleated Midi Skirt",
+        category: "women",
         ratings: [
           Rating(rating: "Elegant and flowy", stars: 5),
           Rating(rating: "Perfect for office and casual", stars: 4),
@@ -107,21 +112,6 @@ class Repository {
     Future.delayed(Duration(milliseconds: 120));
     final categories = await getCategories();
     return [
-      // Product(
-      //   newProduct: true,
-      //   id: 101,
-      //   brand: "Zara",
-      //   image: "assets/images/blouse1.png",
-      //   title: "Classic White Blouse",
-      //   ratings: [
-      //     Rating(rating: "Perfect for office wear", stars: 5),
-      //     Rating(rating: "Good material", stars: 4),
-      //   ],
-      //   description:
-      //       "A timeless white blouse with a slim fit, ideal for both office and casual wear.",
-      //   price: 49,
-      //   categoryData: categories[0],
-      // ),
       Product(
         id: 202,
         newProduct: true,
@@ -129,6 +119,7 @@ class Repository {
         brand: "Zara",
         image: "assets/images/knitwear2.png",
         title: "Cropped Knit Cardigan",
+        category: "men",
         ratings: [
           Rating(rating: "Trendy and stylish", stars: 4),
           Rating(rating: "Soft fabric", stars: 5),
@@ -144,6 +135,7 @@ class Repository {
         brand: "Uniqlo",
         image: "assets/images/knitwear3.png",
         title: "Classic Turtleneck Pullover",
+        category: "men",
         ratings: [
           Rating(rating: "Timeless design", stars: 5),
           Rating(rating: "Keeps you warm", stars: 4),
@@ -153,13 +145,13 @@ class Repository {
         price: 79,
         categoryData: categories[2],
       ),
-
       Product(
         id: 301,
         newProduct: true,
         brand: "Zara",
         image: "assets/images/pants1.png",
         title: "High-Waist Wide-Leg Pants",
+        category: "men",
         ratings: [
           Rating(rating: "Super flattering fit", stars: 5),
           Rating(rating: "Good for office wear", stars: 4),
@@ -175,6 +167,7 @@ class Repository {
         brand: "H&M",
         image: "assets/images/pants2.png",
         title: "Slim Fit Chino Pants",
+        category: "men",
         ratings: [
           Rating(rating: "Great everyday wear", stars: 4),
           Rating(rating: "Comfortable material, but not my type", stars: 2),
@@ -190,6 +183,7 @@ class Repository {
         newProduct: true,
         image: "assets/images/pants3.png",
         title: "Casual Cargo Pants",
+        category: "men",
         ratings: [
           Rating(rating: "Stylish and practical", stars: 5),
           Rating(rating: "Lots of pockets", stars: 3),
@@ -205,6 +199,7 @@ class Repository {
         brand: "Levi's",
         image: "assets/images/jeans1.png",
         title: "Classic Straight-Leg Jeans",
+        category: "women",
         ratings: [
           Rating(rating: "Durable and comfy", stars: 5),
           Rating(rating: "Perfect everyday jeans", stars: 4),

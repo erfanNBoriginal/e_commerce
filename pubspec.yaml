@@ -18,6 +18,7 @@ dependencies:
     sdk: flutter
   overlay_support: ^2.1.0
   provider: ^6.1.5+1
+  persian_number_utility: ^1.1.6
 
 dev_dependencies:
   flutter_test:
