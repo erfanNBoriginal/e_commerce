@@ -4,13 +4,11 @@ import 'package:e_commerce/modules/category/category_page.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
 import 'package:e_commerce/modules/category/filters_page.dart';
 import 'package:e_commerce/modules/home/home.dart';
-import 'package:e_commerce/modules/product_info/product_shell.dart';
+import 'package:e_commerce/modules/rating/rating_page.dart';
 import 'package:e_commerce/modules/shop/shop_page.dart';
 import 'package:e_commerce/modules/product_info/product_info_page.dart';
 import 'package:e_commerce/modules/store/store_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 final rootNavKey = GlobalKey<NavigatorState>();
@@ -18,18 +16,8 @@ final router = GoRouter(
   initialLocation: StrorePage.path,
   navigatorKey: rootNavKey,
   redirect: (context, state) {
-    print('state.topRoute!.name');
-    print(state.topRoute!.name);
-    print('state.fullPath');
-    print(state.fullPath);
-    // print('state.uri.scheme');
-    // print(state.uri.scheme);
-    // print('state.uri.host');
-    // print(state.uri.host);
-    // print('state.uri.port');
-    // print(state.uri.port);
-    // print('state.uri.path');
-    // print(state.uri.path);
+    // print(state.fullPath);
+    // print('state.fullPath');
     return null;
   },
   routes: [
@@ -37,7 +25,8 @@ final router = GoRouter(
       builder: (context, state, navigationShell) {
         bool check() {
           if (state.fullPath!.contains(FiltersPage.path) ||
-              state.fullPath!.contains(ProductInfoPage.path)) {
+              state.fullPath!.contains(ProductInfoPage.path) ||
+              state.fullPath!.contains(RatingPage.path)) {
             return true;
           }
           return false;
@@ -61,6 +50,15 @@ final router = GoRouter(
                 return StrorePage();
               },
               routes: [
+                GoRoute(
+                  path: RatingPage.path,
+                  name: RatingPage.path,
+                  builder:
+                      (context, state) => RatingPage(
+                        initialProduct: state.extra as dynamic,
+                        id: int.parse(state.pathParameters['id']!),
+                      ),
+                ),
                 GoRoute(
                   //  parentNavigatorKey: rootNavKey,
                   path: ProductInfoPage.path,
@@ -109,11 +107,11 @@ final router = GoRouter(
               routes: [
                 GoRoute(
                   redirect: (context, state) {
-                    print('categoryyyy state.extraaaaaaaaaaaaaaaaaaaa');
-                    print(state.extra);
-                    print(state.pathParameters['id']);
-                    print('state.topRoute!.name');
-                    print(state.topRoute!.name);
+                    // print('categoryyyy state.extraaaaaaaaaaaaaaaaaaaa');
+                    // print(state.extra);
+                    // print(state.pathParameters['id']);
+                    // print('state.topRoute!.name');
+                    // print(state.topRoute!.name);
 
                     // return null;
                   },
@@ -135,8 +133,8 @@ final router = GoRouter(
 
                         // print('state.topRoute!.name');
                         // print(state.topRoute!.name);
-                        print('filter extraddd');
-                        print(state.extra);
+                        // print('filter extraddd');
+                        // print(state.extra);
                         // return null;
                       },
                       path: FiltersPage.path,
@@ -149,8 +147,8 @@ final router = GoRouter(
                       routes: [
                         GoRoute(
                           redirect: (context, state) {
-                            print('brands id');
-                            print(state.pathParameters['id']);
+                            // print('brands id');
+                            // print(state.pathParameters['id']);
                             // return null;
                           },
                           path: BrandsPage.path,
@@ -169,16 +167,16 @@ final router = GoRouter(
             ),
           ],
         ),
-        // StatefulShellBranch(
-        //   routes: [
-        //     GoRoute(
-        //       path: GalleryPage.path,
-        //       builder: (context, state) {
-        //         return GalleryPage();
-        //       },
-        //     ),
-        //   ],
-        // ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: GalleryPage.path,
+              builder: (context, state) {
+                return GalleryPage();
+              },
+            ),
+          ],
+        ),
       ],
     ),
   ],

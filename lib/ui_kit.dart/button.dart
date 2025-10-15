@@ -45,14 +45,21 @@ class Button extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(bordeRaius),
           onTap: onTap,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leading != null) leading!,
-                SizedBox(width: 5),
-                U.Text(color: U.Theme.white, title),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 9.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leading != null) leading!,
+                  SizedBox(width: 5),
+                  U.Text(
+                    color: U.Theme.white,
+                    title,
+                    weight: U.TextWeight.regular,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -105,8 +105,11 @@ class CategoryCubit extends Cubit<CategoryState> {
     emit(state.copyWith(selectedColors: selectedColors));
   }
 
-  Future<void> onSortPressed(int selected, {required String title}) async {
+  void onSortPressed(int selected, {required String title}) async {
     emit(state.copyWith(loading: true));
+    emit(
+      state.copyWith(selectedSortFilter: selected, selectedSortCategory: title),
+    );
     // final resProducts = await _repo.getProducts(id: id, sortId: selected);
     final res = await _repo.getProducts(
       id: id,
@@ -117,14 +120,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       sizes: state.selectedSizes,
       brands: state.selectedBrands,
     );
-    emit(
-      state.copyWith(
-        products: res,
-        loading: false,
-        selectedSortFilter: selected,
-        selectedSortCategory: title,
-      ),
-    );
+    emit(state.copyWith(products: res, loading: false));
   }
 
   Future<bool> onFilterApplied() async {

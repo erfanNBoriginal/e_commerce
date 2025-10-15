@@ -1,3 +1,5 @@
+import 'package:e_commerce/domains/models/rating.dart';
+import 'package:e_commerce/modules/rating/rating_length.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 
@@ -224,11 +226,10 @@ class _GalleryPageState extends State<GalleryPage> {
           ),
           SizedBox(height: 32),
           U.Text('Rating star:', fontSize: U.TextSize.s18),
-          U.PickStar(),
+          U.PickStar(onTap: (star) {}),
           SizedBox(height: 32),
           U.Text('TextInput:', fontSize: U.TextSize.s18),
           SizedBox(height: 22),
-
           U.TextInput(title: 'credit card', textCtrl: TextEditingController()),
           SizedBox(height: 22),
           U.Text('checkBox:', fontSize: U.TextSize.s18),
@@ -255,6 +256,8 @@ class _GalleryPageState extends State<GalleryPage> {
               ),
             ],
           ),
+          SizedBox(height: 15),
+          RatingLength(ratings: [3, 2, 3, 3, 2]),
           SizedBox(height: 102),
         ],
       ),

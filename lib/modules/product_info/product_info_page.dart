@@ -5,10 +5,12 @@ import 'package:e_commerce/modules/bag/cubit/bag_cubit.dart';
 import 'package:e_commerce/modules/product_info/color_btms.dart';
 import 'package:e_commerce/modules/product_info/cubit/product_cubit.dart';
 import 'package:e_commerce/modules/product_info/size_btms.dart';
+import 'package:e_commerce/modules/rating/rating_page.dart';
 import 'package:e_commerce/ui_kit.dart/button.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductInfoPage extends StatelessWidget {
   static String path = '/ProductInfoPage';
@@ -179,18 +181,29 @@ class ProductInfoPage extends StatelessWidget {
 
                           Divider(thickness: 0.4),
                           SizedBox(height: 16),
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              U.Text(
-                                'اطلاعات آیتم ها',
-                                weight: U.TextWeight.regular,
-                                fontSize: U.TextSize.s16,
-                              ),
-                              Spacer(),
-                              U.Image.Icon(image: U.Icons.chevron),
-                              SizedBox(width: 11),
-                            ],
+                          InkWell(
+                            onTap: () {
+                              GoRouter.of(context).pushNamed(
+                                pathParameters: {
+                                  'id': productState.product!.id.toString(),
+                                },
+                                extra: productState.product,
+                                RatingPage.path,
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                SizedBox(width: 15),
+                                U.Text(
+                                  'اطلاعات آیتم ها',
+                                  weight: U.TextWeight.regular,
+                                  fontSize: U.TextSize.s16,
+                                ),
+                                Spacer(),
+                                U.Image.Icon(image: U.Icons.chevron),
+                                SizedBox(width: 11),
+                              ],
+                            ),
                           ),
                           SizedBox(height: 16),
                           //    Divider(thickness: 0.4),

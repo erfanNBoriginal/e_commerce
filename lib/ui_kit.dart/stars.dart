@@ -3,8 +3,8 @@ import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 
 class Stars extends StatelessWidget {
   final int stars;
-  final int rateCount;
-  Stars({super.key, required this.stars, required this.rateCount});
+  final int? rateCount;
+  Stars({super.key, required this.stars, this.rateCount});
 
   List<Widget> get getStars {
     List<Widget> tempList = [];
@@ -25,11 +25,12 @@ class Stars extends StatelessWidget {
       children: [
         ...getStars,
         SizedBox(width: 2),
-        U.Text(
-          '(${rateCount.toString()})',
-          weight: U.TextWeight.regular,
-          fontSize: U.TextSize.s10,
-        ),
+        if (rateCount != null)
+          U.Text(
+            '(${rateCount.toString()})',
+            weight: U.TextWeight.regular,
+            fontSize: U.TextSize.s10,
+          ),
       ],
     );
   }

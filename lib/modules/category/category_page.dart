@@ -77,7 +77,9 @@ class CategoryPage extends StatelessWidget {
                 ),
                 SizedBox(height: 17),
                 state.loading
-                    ? Center(child: CircularProgressIndicator())
+                    ? Expanded(
+                      child: Center(child: CircularProgressIndicator()),
+                    )
                     : Expanded(
                       child: GridView.builder(
                         padding: EdgeInsets.symmetric(horizontal: 16),

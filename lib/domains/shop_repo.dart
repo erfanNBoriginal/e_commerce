@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class ShopRepo {
   Future<List<CategoryData>> getCategories() async {
-    Future.delayed(Duration(milliseconds: 100));
+    await Future.delayed(Duration(milliseconds: 100));
     return [
       CategoryData(id: 1, title: 'blouse'),
       CategoryData(id: 2, title: 'Blazers'),
@@ -20,69 +20,14 @@ class ShopRepo {
     ];
   }
 
-  Future<Product> getProductById(int id) async {
-    Future.delayed(Duration(milliseconds: 100));
-    final products = await getProducts();
-    return products.firstWhere((e) => e.id == id);
+  Future<void> updateProducts({Product? product, int? index}) async {
+    await mainProducts(product: product, index: index);
   }
 
-  Future<CategoryData> getCategory(int id) async {
-    Future.delayed(Duration(milliseconds: 100));
+  Future<List<Product>> mainProducts({Product? product, int? index}) async {
     final categories = await getCategories();
-    return categories.firstWhere((e) => e.id == id);
-  }
 
-  Future<List<String>> getSizes() async {
-    await Future.delayed(Duration(milliseconds: 100));
-    return ['XS', 'S', 'M', 'L', 'XL', 'F'];
-  }
-
-  Future<List<Color>> getColors() async {
-    await Future.delayed(Duration(milliseconds: 100));
-    return [
-      Color(0xFF000000),
-      Color(0xFFFFFFFF),
-      Color(0xFFFF0000),
-      Color(0xFF00FF00),
-      Color(0xFF0000FF),
-      Colors.amber,
-      Color(0xFFFF00FF),
-      Color(0xFF00FFFF),
-    ];
-  }
-
-  Future<List<String>> getAllCategories() async {
-    await Future.delayed(Duration(milliseconds: 100));
-    return ['women', 'men', 'boys', 'girls'];
-  }
-
-  Future<List<String>> getBrands() async {
-    await Future.delayed(Duration(milliseconds: 100));
-    return [
-      'Zara',
-      'H&M',
-      "Mango",
-      'Uniqlo',
-      'Forever 21',
-      'Levi\'s',
-      'Nike',
-      'Adidas',
-    ];
-  }
-
-  Future<List<Product>> getProducts({
-    int? id,
-    int? sortId,
-    List<String>? sizes,
-    int? minvalue,
-    int? maxValue,
-    String? category,
-    int? intmaxValue,
-    List<Color>? colors,
-    List<String>? brands,
-  }) async {
-    Future.delayed(Duration(milliseconds: 100));
-    final categories = await getCategories();
+    await Future.delayed(Duration(milliseconds: 50));
     List<Product> products = [
       Product(
         id: 1,
@@ -217,6 +162,9 @@ class ShopRepo {
         category: "men",
         ratings: [
           Rating(rating: "Trendy and stylish", stars: 4),
+          Rating(rating: "Trendy and stylish", stars: 4),
+          Rating(rating: "Trendy and stylish", stars: 4),
+          Rating(rating: "Trendy and stylish", stars: 4),
           Rating(rating: "Soft fabric", stars: 5),
         ],
         description:
@@ -325,7 +273,18 @@ class ShopRepo {
         category: "boys",
         ratings: [
           Rating(rating: "Trendy ripped design", stars: 5),
+          Rating(
+            rating:
+                "Looks great with sneakers and very nice looking on my dear boy which make him look really fantastic",
+            stars: 4,
+          ),
           Rating(rating: "Looks great with sneakers", stars: 4),
+          Rating(rating: "Looks great with sneakers", stars: 5),
+          Rating(rating: "Looks great with sneakers", stars: 2),
+          Rating(rating: "Looks great with sneakers", stars: 2),
+          Rating(rating: "Looks great with sneakers", stars: 3),
+          Rating(rating: "Looks great with sneakers", stars: 4),
+          Rating(rating: "Looks great with sneakers", stars: 1),
         ],
         description:
             "Casual relaxed-fit jeans featuring a distressed ripped style for a modern streetwear look.",
@@ -379,6 +338,76 @@ class ShopRepo {
         categoryData: categories[5],
       ),
     ];
+    if (product != null && index != null) {
+      products.removeAt(index!);
+      products.insert(index, product!);
+    }
+    return products;
+  }
+
+  Future<Product?> getProductById(int id) async {
+    await Future.delayed(Duration(milliseconds: 100));
+    final products = await getProducts();
+    return products.firstWhere((e) => e.id == id);
+  }
+
+  Future<CategoryData> getCategory(int id) async {
+    await Future.delayed(Duration(milliseconds: 100));
+    final categories = await getCategories();
+    return categories.firstWhere((e) => e.id == id);
+  }
+
+  Future<List<String>> getSizes() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    return ['XS', 'S', 'M', 'L', 'XL', 'F'];
+  }
+
+  Future<List<Color>> getColors() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    return [
+      Color(0xFF000000),
+      Color(0xFFFFFFFF),
+      Color(0xFFFF0000),
+      Color(0xFF00FF00),
+      Color(0xFF0000FF),
+      Colors.amber,
+      Color(0xFFFF00FF),
+      Color(0xFF00FFFF),
+    ];
+  }
+
+  Future<List<String>> getAllCategories() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    return ['women', 'men', 'boys', 'girls'];
+  }
+
+  Future<List<String>> getBrands() async {
+    await Future.delayed(Duration(milliseconds: 100));
+    return [
+      'Zara',
+      'H&M',
+      "Mango",
+      'Uniqlo',
+      'Forever 21',
+      'Levi\'s',
+      'Nike',
+      'Adidas',
+    ];
+  }
+
+  Future<List<Product>> getProducts({
+    int? id,
+    int? sortId,
+    List<String>? sizes,
+    int? minvalue,
+    int? maxValue,
+    String? category,
+    int? intmaxValue,
+    List<Color>? colors,
+    List<String>? brands,
+  }) async {
+    await Future.delayed(Duration(milliseconds: 100));
+    List<Product> products = await mainProducts();
     if (id != null) {
       products = products.where((e) => e.categoryData.id == id).toList();
     }

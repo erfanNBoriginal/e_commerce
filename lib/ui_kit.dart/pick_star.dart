@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 
 class PickStar extends StatefulWidget {
-  const PickStar({super.key});
+  final void Function(int star) onTap;
+  const PickStar({super.key, required this.onTap});
 
   @override
   State<PickStar> createState() => _PickStarState();
@@ -14,7 +15,7 @@ class _PickStarState extends State<PickStar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 66,
+      width: 5 * 44,
       height: 66,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -22,6 +23,7 @@ class _PickStarState extends State<PickStar> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              widget.onTap(index);
               currentStar = index;
               setState(() {});
             },

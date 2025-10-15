@@ -15,7 +15,6 @@ class TextInput extends StatefulWidget {
     this.autoFocus = true,
     this.borderRadius = 4,
     required this.title,
-    // required this.isFocused,
     required this.textCtrl,
   });
 
@@ -45,65 +44,70 @@ class _TextInputState extends State<TextInput> {
     return GestureDetector(
       onTap: () {
         focusNode.requestFocus();
-        // isFocused = !isFocused;
-        // setState(() {});
+        isFocused = !isFocused;
+        setState(() {});
       },
       child: Container(
-        // duration: Duration(milliseconds: 100),
-        // padding: EdgeInsets.all(22),
         height: widget.height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           color: U.Theme.white,
         ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  if (widget.textCtrl.text.isNotEmpty || isFocused)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 33.0,
-                        bottom: 14,
-                        left: 20,
-                      ),
-                      child: TextField(
-                        style: TextStyle(fontSize: 14),
-                        controller: widget.textCtrl,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          border: InputBorder.none,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    if (widget.textCtrl.text.isNotEmpty || isFocused)
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 33.0,
+                          bottom: 14,
+                          left: 20,
                         ),
-                        focusNode: focusNode,
+                        child: TextField(
+                          // expands: true,
+                          maxLines: null,
+                          onEditingComplete: () {},
+                          style: TextStyle(fontSize: 14),
+                          controller: widget.textCtrl,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            border: InputBorder.none,
+                          ),
+                          focusNode: focusNode,
+                        ),
+                      ),
+                    AnimatedPositioned(
+                      top:
+                          (widget.textCtrl.text.isNotEmpty || isFocused)
+                              ? 14
+                              : 22,
+                      right: 20,
+                      duration: Duration(milliseconds: 100),
+                      child: U.Text(
+                        fontSize:
+                            (widget.textCtrl.text.isNotEmpty || isFocused)
+                                ? U.TextSize.s11
+                                : U.TextSize.s14,
+                        color: U.Theme.gray,
+                        widget.title,
+                        weight: U.TextWeight.medium,
                       ),
                     ),
-                  AnimatedPositioned(
-                    top:
-                        (widget.textCtrl.text.isNotEmpty || isFocused)
-                            ? 14
-                            : 22,
-                    left: 20,
-                    duration: Duration(milliseconds: 100),
-                    child: U.Text(
-                      fontSize:
-                          (widget.textCtrl.text.isNotEmpty || isFocused)
-                              ? U.TextSize.s11
-                              : U.TextSize.s14,
-                      color: U.Theme.gray,
-                      widget.title,
-                      weight: U.TextWeight.medium,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            if (widget.trailing != null)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: (widget.trailing!),
-              ),
-          ],
+              if (widget.trailing != null)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: (widget.trailing!),
+                ),
+            ],
+          ),
         ),
       ),
     );

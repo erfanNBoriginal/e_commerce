@@ -35,6 +35,13 @@ class Repository {
         ratings: [
           Rating(rating: "Trendy ripped design", stars: 5),
           Rating(rating: "Looks great with sneakers", stars: 4),
+          Rating(rating: "Looks great with sneakers", stars: 4),
+          Rating(rating: "Looks great with sneakers", stars: 5),
+          Rating(rating: "Looks great with sneakers", stars: 2),
+          Rating(rating: "Looks great with sneakers", stars: 2),
+          Rating(rating: "Looks great with sneakers", stars: 3),
+          Rating(rating: "Looks great with sneakers", stars: 4),
+          Rating(rating: "Looks great with sneakers", stars: 1),
         ],
         description:
             "Casual relaxed-fit jeans featuring a distressed ripped style for a modern streetwear look.",
@@ -121,6 +128,9 @@ class Repository {
         title: "Cropped Knit Cardigan",
         category: "men",
         ratings: [
+          Rating(rating: "Trendy and stylish", stars: 4),
+          Rating(rating: "Trendy and stylish", stars: 4),
+          Rating(rating: "Trendy and stylish", stars: 4),
           Rating(rating: "Trendy and stylish", stars: 4),
           Rating(rating: "Soft fabric", stars: 5),
         ],
