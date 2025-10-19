@@ -339,8 +339,8 @@ class ShopRepo {
       ),
     ];
     if (product != null && index != null) {
-      products.removeAt(index!);
-      products.insert(index, product!);
+      products.removeAt(index);
+      products.insert(index, product);
     }
     return products;
   }

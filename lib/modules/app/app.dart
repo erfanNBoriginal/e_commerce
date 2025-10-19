@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:e_commerce/domains/favorite_repo.dart';
 import 'package:e_commerce/domains/shop_repo.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:e_commerce/domains/bag_repo.dart';
@@ -16,6 +17,7 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => Repository()),
+        RepositoryProvider(create: (context) => FavoriteRepo()),
         RepositoryProvider(create: (context) => BagRepo()),
         RepositoryProvider(create: (context) => ShopRepo()),
       ],
@@ -23,7 +25,6 @@ class App extends StatelessWidget {
       child: OverlaySupport.global(
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-
           localizationsDelegates: {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

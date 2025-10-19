@@ -1,30 +1,31 @@
-import 'package:e_commerce/domains/shop_repo.dart';
-import 'package:e_commerce/modules/category/brands.dart';
-import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
+import 'package:e_commerce/modules/favorite/cubit/favorite_cubit.dart';
 import 'package:e_commerce/modules/product_info/not_selected_button.dart';
 import 'package:e_commerce/modules/product_info/select_color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:go_router/go_router.dart';
 
-class FiltersPage extends StatelessWidget {
-  static const String path = '/Filters';
-  final int id;
-  final CategoryCubit categoryCubit;
-  const FiltersPage({super.key, required this.id, required this.categoryCubit});
+class FavoriteFilterDialog extends StatelessWidget {
+  final FavoriteCubit favCubit;
+
+  const FavoriteFilterDialog({super.key, required this.favCubit});
+  static show(BuildContext context, {required FavoriteCubit favCubit}) {
+    showDialog(
+      context: context,
+      builder: (context) => FavoriteFilterDialog(favCubit: favCubit),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return MultiBlocProvider(
-      providers: [BlocProvider.value(value: categoryCubit)],
-      child: BlocBuilder<CategoryCubit, CategoryState>(
+      providers: [BlocProvider.value(value: favCubit)],
+      child: BlocBuilder<FavoriteCubit, FavoriteState>(
         builder: (context, state) {
-          final categoryCubit = context.read<CategoryCubit>();
+          final favCubit = context.read<FavoriteCubit>();
           return Scaffold(
             backgroundColor: U.Theme.background,
             body: Stack(
@@ -49,7 +50,7 @@ class FiltersPage extends StatelessWidget {
                         minRangeValue: state.minValue.toDouble(),
                         maxRangeValue: state.maxValue.toDouble(),
                         onChanged: (min, max) {
-                          categoryCubit.onPriceRangeChanged(min, max);
+                          favCubit.onPriceRangeChanged(min, max);
                         },
                         showType: U.RangeSliderShowType.price,
                       ),
@@ -80,7 +81,7 @@ class FiltersPage extends StatelessWidget {
                           return SelectColor(
                             color: state.colors[index],
                             onPressed: () {
-                              categoryCubit.onColorChanged(state.colors[index]);
+                              favCubit.onColorChanged(state.colors[index]);
                             },
                             isSelected: state.selectedColors.contains(
                               state.colors[index],
@@ -120,18 +121,14 @@ class FiltersPage extends StatelessWidget {
                                 title: state.sizes[index],
                                 size: U.ButtonSize.s,
                                 onTap: () {
-                                  categoryCubit.onSizeChanged(
-                                    state.sizes[index],
-                                  );
+                                  favCubit.onSizeChanged(state.sizes[index]);
                                 },
                                 bordeRaius: U.Theme.r8,
                                 color: U.Theme.primary,
                               )
                               : NotSelectedButton(
                                 onPressed: () {
-                                  categoryCubit.onSizeChanged(
-                                    state.sizes[index],
-                                  );
+                                  favCubit.onSizeChanged(state.sizes[index]);
                                 },
                                 title: state.sizes[index],
                               );
@@ -168,7 +165,7 @@ class FiltersPage extends StatelessWidget {
                             return state.selectedCategory != ''
                                 ? NotSelectedButton(
                                   onPressed: () {
-                                    categoryCubit.onCategorySelected('');
+                                    favCubit.onCategorySelected('');
                                   },
                                   title: 'All',
                                 )
@@ -184,7 +181,7 @@ class FiltersPage extends StatelessWidget {
                                     state.categories[index]
                                 ? NotSelectedButton(
                                   onPressed: () {
-                                    categoryCubit.onCategorySelected(
+                                    favCubit.onCategorySelected(
                                       state.categories[index],
                                     );
                                   },
@@ -204,11 +201,11 @@ class FiltersPage extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
-                        GoRouter.of(context).pushNamed(
-                          BrandsPage.path,
-                          pathParameters: {'id': id.toString()},
-                          extra: categoryCubit,
-                        );
+                        // GoRouter.of(context).pushNamed(
+                        //   BrandsPage.path,
+                        //   pathParameters: {'id': id.toString()},
+                        //   extra: favCubit,
+                        // );
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -245,7 +242,7 @@ class FiltersPage extends StatelessWidget {
                                 // GoRouter.of(context).pushNamed(
                                 //   BrandsPage.path,
                                 //   pathParameters: {'id': id.toString()},
-                                //   extra: categoryCubit,
+                                //   extra: favCubit,
                                 // );
                               },
                               child: U.Image.Icon(image: U.Icons.chevron),
@@ -273,7 +270,7 @@ class FiltersPage extends StatelessWidget {
                             flex: 1,
                             child: U.OutlineButton(
                               onTap: () {
-                                categoryCubit.onFiltersDiscarded();
+                                favCubit.onFiltersDiscarded();
                               },
                               borderType: U.BorderVariants.black,
                               size: U.OutlineButtonSize.large,
@@ -295,7 +292,7 @@ class FiltersPage extends StatelessWidget {
                                   title: 'Apply',
                                   size: U.ButtonSize.m,
                                   onTap: () async {
-                                    await categoryCubit.onFilterApplied();
+                                    await favCubit.onFilterApplied();
                                     GoRouter.of(context).pop();
                                   },
                                   bordeRaius: U.Theme.r25,

@@ -1,10 +1,12 @@
-part of 'category_cubit.dart';
+part of 'favorite_cubit.dart';
 
-class CategoryState {
-  final bool loading;
+class FavoriteState {
+  final List<Favorite> favorites;
+  final Favorite? favorite;
   final int minValue;
   final int maxValue;
   final List<Color> colors;
+  final List<Color> selectedColors;
   final List<String> sizes;
   final List<String> selectedSizes;
   final List<String> categories;
@@ -14,12 +16,29 @@ class CategoryState {
   final List<String> sortFilters;
   final int selectedSortFilter;
   final String selectedSortCategory;
-  final List<Product> products;
-  final CategoryData? category;
-  final List<Color> selectedColors;
+  final bool loading;
+  FavoriteState({
+    required this.selectedColors,
+    required this.minValue,
+    required this.maxValue,
+    required this.colors,
+    required this.sizes,
+    required this.selectedSizes,
+    required this.categories,
+    required this.brands,
+    required this.selectedCategory,
+    required this.selectedBrands,
+    required this.sortFilters,
+    required this.selectedSortFilter,
+    required this.selectedSortCategory,
+    required this.loading,
+    required this.favorite,
+    required this.favorites,
+  });
 
-  CategoryState.init({this.category, this.brands})
+  FavoriteState.init()
     : selectedBrands = [],
+      brands = [],
       categories = [],
       selectedCategory = '',
       selectedSortFilter = 2,
@@ -36,34 +55,17 @@ class CategoryState {
         'Price: High to Low',
         'Rating: High to Low',
       ],
+      favorite = null,
       loading = false,
-      products = [];
+      favorites = [];
 
-  CategoryState({
-    required this.selectedSortFilter,
-    required this.minValue,
-    required this.maxValue,
-    required this.colors,
-    required this.selectedColors,
-    required this.sizes,
-    required this.categories,
-    required this.selectedCategory,
-    required this.selectedSizes,
-    required this.brands,
-    required this.selectedBrands,
-    required this.sortFilters,
-    required this.selectedSortCategory,
-    required this.loading,
-    required this.category,
-    required this.products,
-  });
-
-  CategoryState copyWith({
+  FavoriteState copyWith({
     bool? loading,
-    CategoryData? category,
-    List<Product>? products,
+    List<Favorite>? favorites,
+    List<Favorite>? products,
     List<String>? selectedSizes,
     List<String>? sizes,
+    Favorite? favorite,
     List<String>? categories,
     List<String>? brands,
     List<Color>? colors,
@@ -76,7 +78,7 @@ class CategoryState {
     String? selectedSortCategory,
     String? selectedCategory,
   }) {
-    return CategoryState(
+    return FavoriteState(
       minValue: minValue ?? this.minValue,
       categories: categories ?? this.categories,
       selectedSortFilter: selectedSortFilter ?? this.selectedSortFilter,
@@ -91,8 +93,8 @@ class CategoryState {
       loading: loading ?? this.loading,
       sortFilters: sortFilters ?? this.sortFilters,
       selectedSortCategory: selectedSortCategory ?? this.selectedSortCategory,
-      category: category ?? this.category,
-      products: products ?? this.products,
+      favorites: favorites ?? this.favorites,
+      favorite: favorite,
     );
   }
 }

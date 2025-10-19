@@ -107,7 +107,6 @@ class ProductInfoPage extends StatelessWidget {
                                       onTap: () {
                                         ColorBottomSheet.show(
                                           bagCubit: context.read<BagCubit>(),
-
                                           context,
                                           product: productState.product!,
                                         );

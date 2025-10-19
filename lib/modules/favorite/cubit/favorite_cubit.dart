@@ -1,67 +1,57 @@
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/domains/models/category_data.dart';
+import 'package:e_commerce/domains/favorite_repo.dart';
+import 'package:e_commerce/domains/models/favorite.dart';
 import 'package:e_commerce/domains/models/product.dart';
-import 'package:e_commerce/domains/shop_repo.dart';
 import 'package:meta/meta.dart';
+import 'package:overlay_support/overlay_support.dart';
 
-part 'category_state.dart';
+part 'favorite_state.dart';
 
-class CategoryCubit extends Cubit<CategoryState> {
-  final ShopRepo _repo;
-  final List<String>? initialBrands;
-  final int id;
-  final CategoryData? initial;
-  CategoryCubit({
-    this.initial,
-    this.initialBrands,
-    required this.id,
-    required ShopRepo repo,
-  }) : _repo = repo,
-       super(CategoryState.init(category: initial, brands: initialBrands)) {
+class FavoriteCubit extends Cubit<FavoriteState> {
+  final FavoriteRepo _repo;
+
+  FavoriteCubit({required FavoriteRepo repo})
+    : _repo = repo,
+      super(FavoriteState.init()) {
+    print('state.favorites.length');
+    print(state.favorites.length);
     onInit();
   }
 
-  /////////functions
+  ////////Functions//////////
 
-  /////////events
-
-  Future<void> onRefresh() async {
-    emit(state.copyWith(loading: true));
-    await Future.delayed(const Duration(seconds: 1));
-    final res = await _repo.getProducts(
-      id: id,
-      category: state.selectedCategory,
-      minvalue: state.minValue,
-      maxValue: state.maxValue,
-      sortId: state.selectedSortFilter,
-      colors: state.selectedColors,
-      sizes: state.selectedSizes,
-      brands: state.selectedBrands,
-    );
-    emit(state.copyWith(products: res, loading: false));
-  }
+  ////////events//////////
 
   void onInit() async {
     emit(state.copyWith(loading: true));
-    final res = await _repo.getCategory(id);
-    final categories = await _repo.getAllCategories();
     final colors = await _repo.getColors();
     final sizes = await _repo.getSizes();
     final brands = await _repo.getBrands();
-    final resProducts = await _repo.getProducts(id: id);
+    final categories = await _repo.getAllCategories();
+    final res = await _repo.getFavorites();
     emit(
       state.copyWith(
-        categories: categories,
-        category: res,
-        brands: brands,
-        colors: colors,
-        sizes: sizes,
-        products: resProducts,
+        favorites: res,
         loading: false,
+        categories: categories,
+        brands: brands,
+        sizes: sizes,
+        colors: colors,
       ),
     );
+  }
+
+  void onRefresh() async {
+    emit(state.copyWith(loading: true));
+    final res = await _repo.getFavorites();
+    emit(state.copyWith(favorites: res, loading: false));
+  }
+
+  bool onSizeSelected({required String size, required Product item}) {
+    emit(state.copyWith(favorite: Favorite(product: item, size: size)));
+    return true;
   }
 
   void onBrandSelected(String brand) {
@@ -127,8 +117,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       state.copyWith(selectedSortFilter: selected, selectedSortCategory: title),
     );
     // final resProducts = await _repo.getProducts(id: id, sortId: selected);
-    final res = await _repo.getProducts(
-      id: id,
+    final res = await _repo.getFavorites(
       minvalue: state.minValue,
       maxValue: state.maxValue,
       sortId: selected,
@@ -142,8 +131,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<bool> onFilterApplied() async {
     emit(state.copyWith(loading: true));
     await Future.delayed(const Duration(seconds: 1));
-    final res = await _repo.getProducts(
-      id: id,
+    final res = await _repo.getFavorites(
       category: state.selectedCategory,
       minvalue: state.minValue,
       maxValue: state.maxValue,
@@ -152,8 +140,35 @@ class CategoryCubit extends Cubit<CategoryState> {
       sizes: state.selectedSizes,
       brands: state.selectedBrands,
     );
-    emit(state.copyWith(products: res));
+    emit(state.copyWith(favorites: res));
     emit(state.copyWith(loading: false));
     return true;
+  }
+
+  Future<bool> onColorSelected(Color color) async {
+    final fav = Favorite(
+      product: state.favorite!.product,
+      color: color,
+      size: state.favorite!.size,
+    );
+    final temp = [...state.favorites];
+    temp.add(fav);
+    await _repo.updateFavorites(temp);
+    emit(state.copyWith(favorites: temp));
+    toast('product added to favorites');
+    print(state.favorites.length);
+    return true;
+  }
+
+  void onProductRemoved(Product product) {
+    final tempList = [...state.favorites];
+    final temp = state.favorites.indexWhere((e) => e.product == product);
+    tempList.removeAt(temp);
+    emit(state.copyWith(favorites: tempList));
+    _repo.updateFavorites(state.favorites);
+  }
+
+  void changeFav() {
+    emit(state.copyWith(favorite: null));
   }
 }

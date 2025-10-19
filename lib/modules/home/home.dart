@@ -49,6 +49,13 @@ class HomeShell extends StatelessWidget {
 
                             title: 'shop',
                           ),
+                          U.NavigationBarItem(
+                            size: 30,
+                            notActivePath: U.Icons.favorite,
+                            activePath: U.Icons.favoriteActive,
+
+                            title: 'favorites',
+                          ),
                         ],
                       );
                     },

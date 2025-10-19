@@ -48,10 +48,9 @@ class BagCubit extends Cubit<BagState> {
 
   void onInit() async {
     emit(state.copyWith(loading: true));
-    // final res = _repo.getTempItems();
-    // final resBagItems = await _repo.getBagItems();
+    final resBagItems = await _repo.getBagItems();
     // print(res.length);
-    emit(state.copyWith(loading: false));
+    emit(state.copyWith(bagItems: resBagItems, loading: false));
   }
 
   //
@@ -66,10 +65,6 @@ class BagCubit extends Cubit<BagState> {
       temp.add(BagItem(product: product, color: color));
     }
     emit(state.copyWith(bagItems: temp));
-    // print(
-    //   '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
-    // );
-    // _repo.addTempItems(state.bagItems);
   }
 
   //
@@ -83,12 +78,7 @@ class BagCubit extends Cubit<BagState> {
     } else {
       temp.add(BagItem(product: product, size: size));
     }
-
     emit(state.copyWith(bagItems: temp));
-    // print(
-    //   '${state.bagItems[0].size} ${state.bagItems[0].count} ${state.bagItems[0].product.title}',
-    // );
-    // _repo.addTempItems(state.bagItems);
   }
 
   Future<void> onAddedToCart(BagItem? item) async {

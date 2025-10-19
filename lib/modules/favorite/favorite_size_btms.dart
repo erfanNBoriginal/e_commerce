@@ -1,18 +1,22 @@
 import 'package:e_commerce/domains/bag_repo.dart';
+import 'package:e_commerce/domains/favorite_repo.dart';
 import 'package:e_commerce/domains/models/product.dart';
 import 'package:e_commerce/domains/shop_repo.dart';
 import 'package:e_commerce/modules/bag/cubit/bag_cubit.dart';
+import 'package:e_commerce/modules/favorite/cubit/favorite_cubit.dart';
+import 'package:e_commerce/modules/favorite/favorite_color_btms.dart';
 import 'package:e_commerce/modules/product_info/not_selected_button.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-class SizeBottomSheet extends StatelessWidget {
+class FavoriteSizeBtms extends StatelessWidget {
   final Product product;
   static show(
     BuildContext context, {
     required Product product,
-    BagCubit? bagCubit,
+    FavoriteCubit? favCubit,
   }) {
     U.BottomSheet.show(
       maxWidth: 450,
@@ -22,27 +26,27 @@ class SizeBottomSheet extends StatelessWidget {
       builder: (context) {
         return MultiBlocProvider(
           providers: [
-            bagCubit == null
+            favCubit == null
                 ? BlocProvider(
                   create:
                       (context) =>
-                          BagCubit(repository: context.read<BagRepo>()),
+                          FavoriteCubit(repo: context.read<FavoriteRepo>()),
                 )
-                : BlocProvider.value(value: bagCubit),
+                : BlocProvider.value(value: favCubit),
           ],
-          child: SizeBottomSheet(product: product),
+          child: FavoriteSizeBtms(product: product),
         );
       },
     );
   }
 
-  const SizeBottomSheet({super.key, required this.product});
+  const FavoriteSizeBtms({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    final bagCubit = context.read<BagCubit>();
+    final favCubit = context.read<FavoriteCubit>();
 
-    return BlocBuilder<BagCubit, BagState>(
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
       builder: (context, state) {
         return ListView(
           // padding: EdgeInsets.all(9),
@@ -69,82 +73,51 @@ class SizeBottomSheet extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(16),
                 itemBuilder: (context, index) {
-                  // print(state.bagItems)
-
-                  // print('index');
-                  // print(index);
-                  // print('state.bagItems.length');
-                  // print(state.bagItems.length);
-                  // print(state.)
-                  return
-                  //  Container(color: Colors.red, width: 22, height: 22);
-                  // temp.size == widget.product.sizes[index]
-                  state.bagItems.indexWhere((e) {
-                            return e.product.id == product.id;
-                          }) ==
-                          -1
+                  return state.favorite == null ||
+                          product != state.favorite?.product
                       ? NotSelectedButton(
                         onPressed: () {
-                          // print(temp!.product.title);
-
-                          // selectedSize = widget.product.sizes[index];
-                          bagCubit.onSizeSelected(
-                            product: product,
+                          final temp = favCubit.onSizeSelected(
+                            item: product,
                             size: product.sizes[index],
                           );
-                          // selectedSize = widget.product.sizes[index];
-                          // setState(() {});
+                          if (temp) {
+                            GoRouter.of(context).pop();
+                            FavoriteColorBtms.show(
+                              context,
+                              product: product,
+                              favCubit: context.read<FavoriteCubit>(),
+                            );
+                          }
                         },
                         title: product.sizes[index],
                       )
-                      : state
-                              .bagItems[state.bagItems.indexWhere((e) {
-                                return e.product.id == product.id;
-                              })]
-                              .size ==
-                          product.sizes[index]
+                      : state.favorite!.size == product.sizes[index]
                       ? U.Button(
                         title: product.sizes[index],
                         size: U.ButtonSize.s,
-                        onTap: () {
-                          // cubit.onProductSizeChanged(
-                          //   widget.product.sizes[index],
-                          // );
-                          // selectedSize = '';
-                          // setState(() {});
-                        },
+                        onTap: () {},
                         bordeRaius: U.Theme.r8,
                         color: U.Theme.primary,
                       )
                       : NotSelectedButton(
                         onPressed: () {
-                          bagCubit.onSizeSelected(
-                            product: product,
+                          final temp = favCubit.onSizeSelected(
+                            item: product,
                             size: product.sizes[index],
                           );
-                          // selectedSize = widget.product.sizes[index];
-                          // setState(() {});
+                          if (temp) {
+                            print('fucking A');
+                            FavoriteColorBtms.show(
+                              context,
+                              product: product,
+                              favCubit: context.read<FavoriteCubit>(),
+                            );
+                            // GoRouter.of(context).pop();
+                          }
                         },
                         title: product.sizes[index],
                       );
-                  // selectedSize == widget.product.sizes[index]
-                  //     ? U.Button(
-                  //       title: widget.product.sizes[index],
-                  //       size: U.ButtonSize.s,
-                  //       onTap: () {
-                  //         selectedSize = '';
-                  //         setState(() {});
-                  //       },
-                  //       bordeRaius: U.Theme.r8,
-                  //       color: U.Theme.primary,
-                  //     )
-                  //     : NotSelectedButton(
-                  //       onPressed: () {
-                  //         selectedSize = widget.product.sizes[index];
-                  //         setState(() {});
-                  //       },
-                  //       title: widget.product.sizes[index],
-                  //     );
                 },
               ),
             ),
@@ -168,10 +141,6 @@ class SizeBottomSheet extends StatelessWidget {
             Divider(thickness: 0.4),
 
             SizedBox(height: 116),
-            // Row(children: [
-
-            //   ],
-            //  ),//
           ],
         );
       },

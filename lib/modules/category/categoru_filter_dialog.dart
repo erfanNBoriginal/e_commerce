@@ -1,25 +1,26 @@
-import 'package:e_commerce/domains/shop_repo.dart';
-import 'package:e_commerce/modules/category/brands.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
 import 'package:e_commerce/modules/product_info/not_selected_button.dart';
 import 'package:e_commerce/modules/product_info/select_color.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_commerce/modules/store/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class FiltersPage extends StatelessWidget {
-  static const String path = '/Filters';
-  final int id;
+class CategoryFilterDialog extends StatelessWidget {
   final CategoryCubit categoryCubit;
-  const FiltersPage({super.key, required this.id, required this.categoryCubit});
+  const CategoryFilterDialog({super.key, required this.categoryCubit});
+
+  static show(BuildContext context, {required CategoryCubit categoryCubit}) {
+    showDialog(
+      context: context,
+      builder: (context) => CategoryFilterDialog(categoryCubit: categoryCubit),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return MultiBlocProvider(
       providers: [BlocProvider.value(value: categoryCubit)],
       child: BlocBuilder<CategoryCubit, CategoryState>(
@@ -204,11 +205,11 @@ class FiltersPage extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
-                        GoRouter.of(context).pushNamed(
-                          BrandsPage.path,
-                          pathParameters: {'id': id.toString()},
-                          extra: categoryCubit,
-                        );
+                        // GoRouter.of(context).pushNamed(
+                        //   BrandsPage.path,
+                        //   pathParameters: {'id': id.toString()},
+                        //   extra: categoryCubit,
+                        // );
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(

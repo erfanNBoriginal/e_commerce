@@ -3,6 +3,7 @@ import 'package:e_commerce/modules/category/brands.dart';
 import 'package:e_commerce/modules/category/category_page.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
 import 'package:e_commerce/modules/category/filters_page.dart';
+import 'package:e_commerce/modules/favorite/favorites_page.dart';
 import 'package:e_commerce/modules/home/home.dart';
 import 'package:e_commerce/modules/rating/rating_page.dart';
 import 'package:e_commerce/modules/shop/shop_page.dart';
@@ -167,13 +168,22 @@ final router = GoRouter(
             ),
           ],
         ),
+        // StatefulShellBranch(
+        //   routes: [
+        //     GoRoute(
+        //       path: GalleryPage.path,
+        //       builder: (context, state) {
+        //         return GalleryPage();
+        //       },
+        //     ),
+        //   ],
+        // ),
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: GalleryPage.path,
-              builder: (context, state) {
-                return GalleryPage();
-              },
+              path: FavoritesPage.path,
+              name: FavoritesPage.path,
+              builder: (context, state) => FavoritesPage(),
             ),
           ],
         ),
