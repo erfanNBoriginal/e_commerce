@@ -30,10 +30,12 @@ class FavoritesPage extends StatelessWidget {
         ),
       ],
       child: BlocListener<HomeCubit, HomeState>(
-        listenWhen: (previous, current) => current.selectedIndex == 2,
+        listenWhen: (previous, current) => current.selectedIndex == 3,
         listener: (context, state) {
           final favCubit = context.read<FavoriteCubit>();
+          final bagCubit = context.read<BagCubit>();
           favCubit.onRefresh();
+          bagCubit.onRefresh();
         },
         child: BlocBuilder<FavoriteCubit, FavoriteState>(
           builder: (context, state) {
@@ -41,44 +43,47 @@ class FavoritesPage extends StatelessWidget {
             return Scaffold(
               body: Column(
                 children: [
-                  U.AppBar(title: 'favorites'),
+                  U.AppBar(back: false, title: 'favorites'),
                   SizedBox(height: 10),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        U.Image.Icon(image: U.Icons.filter),
-                        SizedBox(width: 7),
-                        GestureDetector(
-                          onTap: () {
-                            FavoriteFilterDialog.show(
-                              context,
-                              favCubit: favCubit,
-                            );
-                          },
-                          child: U.Text('Filters'),
+                  state.loading
+                      ? Expanded(
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                      : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            U.Image.Icon(image: U.Icons.filter),
+                            SizedBox(width: 7),
+                            GestureDetector(
+                              onTap: () {
+                                FavoriteFilterDialog.show(
+                                  context,
+                                  favCubit: favCubit,
+                                );
+                              },
+                              child: U.Text('Filters'),
+                            ),
+                            U.Image.Icon(image: U.Icons.highlow),
+                            SizedBox(width: 7),
+                            GestureDetector(
+                              onTap: () {
+                                // SortBottomSheet.show(
+                                //   context,
+                                //   categoryCubit: context.read<CategoryCubit>(),
+                                // );
+                              },
+                              child: U.Text(
+                                state.selectedSortCategory == ''
+                                    ? 'price : highest to lowest'
+                                    : state.selectedSortCategory,
+                              ),
+                            ),
+                            U.Image.Icon(image: U.Icons.viewList),
+                          ],
                         ),
-                        U.Image.Icon(image: U.Icons.highlow),
-                        SizedBox(width: 7),
-                        GestureDetector(
-                          onTap: () {
-                            // SortBottomSheet.show(
-                            //   context,
-                            //   categoryCubit: context.read<CategoryCubit>(),
-                            // );
-                          },
-                          child: U.Text(
-                            state.selectedSortCategory == ''
-                                ? 'price : highest to lowest'
-                                : state.selectedSortCategory,
-                          ),
-                        ),
-                        U.Image.Icon(image: U.Icons.viewList),
-                      ],
-                    ),
-                  ),
+                      ),
                   SizedBox(height: 10),
 
                   Expanded(

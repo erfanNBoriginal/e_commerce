@@ -116,6 +116,7 @@ class ProductCard extends StatelessWidget {
                   child:
                       temp.isEmpty
                           ? InkWell(
+                            borderRadius: BorderRadius.circular(22),
                             onTap: () {
                               product != state.favorite?.product
                                   ? FavoriteSizeBtms.show(

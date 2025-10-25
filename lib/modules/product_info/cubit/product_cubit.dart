@@ -19,9 +19,13 @@ class ProductCubit extends Cubit<ProductState> {
 
   ///////////events
   Future<void> onInit() async {
-    if (id != null) {
+    if (product == null) {
+      print('id');
+      print(id);
       emit(state.copyWith(loading: true));
       final productRes = await _repo.getProductById(id!);
+      print('productRes');
+      print(productRes?.title);
       emit(state.copyWith(loading: false, product: productRes));
     }
   }

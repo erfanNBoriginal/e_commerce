@@ -25,6 +25,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   ////////events//////////
 
   void onInit() async {
+    print('hhhhhhhhhhhhhhhhi');
     emit(state.copyWith(loading: true));
     final colors = await _repo.getColors();
     final sizes = await _repo.getSizes();
@@ -44,9 +45,20 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   }
 
   void onRefresh() async {
+    print('fuuuuuuuuuuu');
     emit(state.copyWith(loading: true));
-    final res = await _repo.getFavorites();
+    final res = await _repo.getFavorites(
+      category: state.selectedCategory,
+      minvalue: state.minValue,
+      maxValue: state.maxValue,
+      sortId: state.selectedSortFilter,
+      colors: state.selectedColors,
+      sizes: state.selectedSizes,
+      brands: state.selectedBrands,
+    );
     emit(state.copyWith(favorites: res, loading: false));
+    print('state.favorites.length refresh');
+    print(state.favorites.length);
   }
 
   bool onSizeSelected({required String size, required Product item}) {
@@ -165,7 +177,16 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     final temp = state.favorites.indexWhere((e) => e.product == product);
     tempList.removeAt(temp);
     emit(state.copyWith(favorites: tempList));
+    print('state.favorites.length');
+    print(state.favorites.length);
     _repo.updateFavorites(state.favorites);
+  }
+
+  void onAddedtoFavorites(Favorite fav) async {
+    List<Favorite> favs = [...state.favorites];
+    favs.add(fav);
+    await _repo.updateFavorites(favs);
+    emit(state.copyWith(favorites: favs));
   }
 
   void changeFav() {

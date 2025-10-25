@@ -1,4 +1,5 @@
 import 'package:e_commerce/gallery_page.dart';
+import 'package:e_commerce/modules/bag/bag_page.dart';
 import 'package:e_commerce/modules/category/brands.dart';
 import 'package:e_commerce/modules/category/category_page.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
@@ -121,6 +122,7 @@ final router = GoRouter(
                   builder:
                       (context, state) => CategoryPage(
                         id: int.parse(state.pathParameters['id']!),
+                        initial: state.extra as dynamic,
                       ),
                   routes: [
                     GoRoute(
@@ -178,6 +180,15 @@ final router = GoRouter(
         //     ),
         //   ],
         // ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: BagPage.path,
+              name: BagPage.path,
+              builder: (context, state) => BagPage(),
+            ),
+          ],
+        ),
         StatefulShellBranch(
           routes: [
             GoRoute(

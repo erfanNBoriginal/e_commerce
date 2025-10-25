@@ -1,9 +1,11 @@
 import 'package:e_commerce/domains/bag_repo.dart';
+import 'package:e_commerce/domains/models/bag_item.dart';
 import 'package:e_commerce/domains/models/product.dart';
 import 'package:e_commerce/domains/shop_repo.dart';
 import 'package:e_commerce/modules/bag/cubit/bag_cubit.dart';
 import 'package:e_commerce/modules/product_info/color_btms.dart';
 import 'package:e_commerce/modules/product_info/cubit/product_cubit.dart';
+import 'package:e_commerce/modules/product_info/product_stack.dart';
 import 'package:e_commerce/modules/product_info/size_btms.dart';
 import 'package:e_commerce/modules/rating/rating_page.dart';
 import 'package:e_commerce/ui_kit.dart/button.dart';
@@ -42,7 +44,7 @@ class ProductInfoPage extends StatelessWidget {
           final bagCubit = BlocProvider.of<BagCubit>(context);
           return BlocBuilder<ProductCubit, ProductState>(
             builder: (context, productState) {
-              return productState.loading
+              return productState.product == null
                   ? Center(child: CircularProgressIndicator())
                   : Stack(
                     children: [
@@ -50,7 +52,9 @@ class ProductInfoPage extends StatelessWidget {
                         // padding: EdgeInsets.all(11),
                         scrollDirection: Axis.vertical,
                         children: [
-                          SizedBox(height: 20),
+                          productState.loading
+                              ? Center(child: CircularProgressIndicator())
+                              : SizedBox(height: 20),
                           U.Image(
                             boxfit: BoxFit.scaleDown,
                             image: productState.product!.image,
@@ -88,10 +92,9 @@ class ProductInfoPage extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             U.Text(
-                                              state.bagItems.isEmpty
+                                              state.bagItem?.size == null
                                                   ? 'Size'
-                                                  : state.bagItems.first.size
-                                                      .toString(),
+                                                  : state.bagItem!.size!,
                                             ),
                                             Spacer(),
                                             U.Image.Icon(
@@ -160,18 +163,22 @@ class ProductInfoPage extends StatelessWidget {
                                 U.Text(
                                   weight: U.TextWeight.regular,
                                   fontSize: U.TextSize.s11,
+                                  color: U.Theme.gray,
                                   productState.product!.title,
                                 ),
+                                SizedBox(height: 8),
                                 U.Stars(
                                   rateCount:
                                       productState.product!.ratings.length,
                                   stars:
                                       productState.product!.getRating.toInt(),
                                 ),
+                                SizedBox(height: 16),
                                 //SizedBox(height: 16),
                                 U.Text(
                                   fontSize: U.TextSize.s14,
                                   color: U.Theme.black,
+                                  weight: U.TextWeight.regular,
                                   productState.product!.description,
                                 ),
                               ],
@@ -253,7 +260,12 @@ class ProductInfoPage extends StatelessWidget {
                         left: 0,
                         right: 0,
                         top: 0,
-                        child: U.AppBar(title: productState.product!.title),
+                        child: U.AppBar(
+                          title:
+                              productState.loading
+                                  ? 'title'
+                                  : productState.product!.title,
+                        ),
                       ),
                       Positioned(
                         left: 0,
@@ -261,42 +273,69 @@ class ProductInfoPage extends StatelessWidget {
                         bottom: 0,
                         child: BlocBuilder<BagCubit, BagState>(
                           builder: (context, state) {
-                            final bagCubit = context.read<BagCubit>();
-                            // print('state.bagItems.length');
-                            print("state.loading");
-                            print(state.loading);
-                            final item =
+                            final list =
                                 state.bagItems
                                     .where(
-                                      (element) =>
-                                          element.product.id ==
-                                          productState.product!.id,
+                                      (e) =>
+                                          productState.product!.id ==
+                                          e.product.id,
                                     )
-                                    .firstOrNull;
-                            // if (item != null) {
-                            //   // print('item.size');
-                            //   // print(item.size);
-                            // } else {
-                            //   //          print('nulllll');
-                            // }
+                                    .toList();
+
+                            final bagCubit = context.read<BagCubit>();
+                            BagItem? item =
+                                productState.product == state.bagItem?.product
+                                    ? state.bagItem
+                                    : null;
                             return state.loading
                                 ? Center(child: CircularProgressIndicator())
-                                : Material(
-                                  elevation: 7,
-                                  child: Container(
-                                    padding: EdgeInsets.all(16),
-                                    height: 78,
-                                    child: U.Button(
-                                      title: 'Add to Cart',
-                                      size: ButtonSize.l,
-                                      onTap: () async {
-                                        await bagCubit.onAddedToCart(item);
-                                        print('state.bagItems.length');
-                                        print(state.bagItems.length);
-                                      },
-                                      bordeRaius: U.Theme.r25,
-                                      color: U.Theme.primary,
-                                    ),
+                                : Container(
+                                  color: U.Theme.white,
+                                  height: 70,
+                                  child: Row(
+                                    children: [
+                                      if (list.isNotEmpty)
+                                        Expanded(
+                                          flex: 1,
+                                          child: SizedBox(
+                                            height: 55,
+                                            child: ListView.separated(
+                                              scrollDirection: Axis.horizontal,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                  ),
+                                              separatorBuilder:
+                                                  (_, __) =>
+                                                      const SizedBox(width: 8),
+                                              itemCount: list.length,
+                                              itemBuilder:
+                                                  (context, index) =>
+                                                      ProductStack(
+                                                        item: list[index],
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      Expanded(
+                                        flex: list.isNotEmpty ? 1 : 3,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(16),
+                                          height: 78,
+                                          child: U.Button(
+                                            title: 'اضافه به سبد خرید',
+                                            size: ButtonSize.l,
+                                            onTap: () async {
+                                              await bagCubit.onAddedToCart(
+                                                item,
+                                              );
+                                            },
+                                            bordeRaius: U.Theme.r25,
+                                            color: U.Theme.primary,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 );
                           },

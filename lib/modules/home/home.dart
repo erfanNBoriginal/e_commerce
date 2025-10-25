@@ -39,7 +39,7 @@ class HomeShell extends StatelessWidget {
                             size: 30,
                             notActivePath: U.Icons.home,
                             activePath: U.Icons.homeActivate,
-                            title: 'home',
+                            title: 'خانه',
                             // isSelected: page.currentIndex == 1,
                           ),
                           U.NavigationBarItem(
@@ -47,14 +47,21 @@ class HomeShell extends StatelessWidget {
                             notActivePath: U.Icons.shop,
                             activePath: U.Icons.shopActivated,
 
-                            title: 'shop',
+                            title: 'فروشگاه',
+                          ),
+                          U.NavigationBarItem(
+                            size: 30,
+                            notActivePath: U.Icons.bag,
+                            activePath: U.Icons.bagActive,
+
+                            title: 'سبد',
                           ),
                           U.NavigationBarItem(
                             size: 30,
                             notActivePath: U.Icons.favorite,
                             activePath: U.Icons.favoriteActive,
 
-                            title: 'favorites',
+                            title: 'علاقه مندی ها',
                           ),
                         ],
                       );

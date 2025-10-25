@@ -1,3 +1,4 @@
+import 'package:e_commerce/brands_dialog.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
 import 'package:e_commerce/modules/product_info/not_selected_button.dart';
 import 'package:e_commerce/modules/product_info/select_color.dart';
@@ -205,6 +206,10 @@ class CategoryFilterDialog extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
+                        BrandsDialog.show(
+                          context,
+                          categoryCubit: categoryCubit,
+                        );
                         // GoRouter.of(context).pushNamed(
                         //   BrandsPage.path,
                         //   pathParameters: {'id': id.toString()},
@@ -243,6 +248,10 @@ class CategoryFilterDialog extends StatelessWidget {
                             Spacer(),
                             GestureDetector(
                               onTap: () {
+                                // BrandsDialog.show(
+                                //   context,
+                                //   categoryCubit: categoryCubit,
+                                // );
                                 // GoRouter.of(context).pushNamed(
                                 //   BrandsPage.path,
                                 //   pathParameters: {'id': id.toString()},

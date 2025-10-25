@@ -10,13 +10,13 @@ class ShopRepo {
   Future<List<CategoryData>> getCategories() async {
     await Future.delayed(Duration(milliseconds: 100));
     return [
-      CategoryData(id: 1, title: 'blouse'),
-      CategoryData(id: 2, title: 'Blazers'),
-      CategoryData(id: 3, title: 'Knitwear'),
-      CategoryData(id: 4, title: 'Pants'),
-      CategoryData(id: 5, title: 'Jeans'),
-      CategoryData(id: 6, title: 'Skirts'),
-      CategoryData(id: 7, title: 'Dresses'),
+      CategoryData(id: 1, title: 'بلوز'),
+      CategoryData(id: 2, title: 'کت'),
+      CategoryData(id: 3, title: 'بافت'),
+      CategoryData(id: 4, title: 'شلوار'),
+      CategoryData(id: 5, title: 'جین'),
+      CategoryData(id: 6, title: 'دامن'),
+      CategoryData(id: 7, title: 'لباس مجلسی'),
     ];
   }
 
@@ -32,63 +32,63 @@ class ShopRepo {
       Product(
         id: 1,
         image: 'assets/images/image (1).jpg',
-        title: 'pull over',
-        description: 'description',
+        title: 'پلیور',
+        description: 'توضیحات محصول',
         price: 51,
-        category: 'women',
+        category: 'زنانه',
         categoryData: categories[1],
         brand: 'Mango',
         ratings: [
-          Rating(rating: 'sdadsd', stars: 3),
-          Rating(rating: 'djfhnsd', stars: 2),
+          Rating(rating: 'محصول معمولی بود', stars: 3),
+          Rating(rating: 'کیفیت متوسطی داشت', stars: 2),
         ],
       ),
       Product(
         id: 2,
         image: 'assets/images/image (4).jpg',
-        title: 'blouse',
-        description: 'description',
+        title: 'بلوز',
+        description: 'توضیحات محصول',
         price: 11,
-        category: 'women',
+        category: 'زنانه',
         categoryData: categories[1],
         brand: 'H&M',
-        ratings: [Rating(rating: 'djfhnsd', stars: 2)],
+        ratings: [Rating(rating: 'خوب بود اما خاص نبود', stars: 2)],
       ),
       Product(
         id: 3,
         image: 'assets/images/image.jpg',
-        title: 'shirt',
-        description: 'description',
+        title: 'پیراهن',
+        description: 'توضیحات محصول',
         price: 14,
-        category: 'women',
+        category: 'زنانه',
         categoryData: categories[1],
         brand: 'H&M',
-        ratings: [Rating(rating: 'djfhnsd', stars: 1)],
+        ratings: [Rating(rating: 'کیفیت پایینی داشت', stars: 1)],
       ),
       Product(
         id: 4,
         image: 'assets/images/image.png',
-        title: 'pants',
-        description: 'description',
+        title: 'شلوار',
+        description: 'توضیحات محصول',
         price: 17,
-        category: 'women',
+        category: 'زنانه',
         categoryData: categories[1],
-        brand: 'zara',
-        ratings: [Rating(rating: 'garbage product', stars: 3)],
+        brand: 'Zara',
+        ratings: [Rating(rating: 'محصول بی‌کیفیت', stars: 3)],
       ),
 
       Product(
         id: 102,
         brand: "H&M",
         image: "assets/images/blouse2.png",
-        title: "Floral Print Blouse",
-        category: "women",
+        title: "بلوز گل‌دار",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Beautiful and comfy", stars: 5),
-          Rating(rating: "Colors are vibrant", stars: 4),
+          Rating(rating: "زیبا و راحت", stars: 5),
+          Rating(rating: "رنگ‌ها خیلی زنده و جذاب هستن", stars: 4),
         ],
         description:
-            "Lightweight floral blouse with puff sleeves, perfect for spring outings.",
+            "بلوزی سبک با طرح گلدار و آستین پفی، مناسب برای روزهای بهاری.",
         price: 39,
         categoryData: categories[0],
       ),
@@ -96,14 +96,14 @@ class ShopRepo {
         id: 103,
         brand: "Mango",
         image: "assets/images/blouse3.png",
-        title: "Silk Satin Blouse",
-        category: "women",
+        title: "بلوز ساتن ابریشمی",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Very elegant", stars: 5),
-          Rating(rating: "A bit pricey but worth it", stars: 4),
+          Rating(rating: "خیلی شیک و مجلسی", stars: 5),
+          Rating(rating: "کمی گرون اما ارزشش رو داره", stars: 4),
         ],
         description:
-            "Luxurious silk satin blouse with a smooth finish, perfect for evening wear.",
+            "بلوزی لوکس از جنس ساتن ابریشم با سطحی براق، مناسب برای مجالس و مهمانی‌ها.",
         price: 79,
         categoryData: categories[0],
       ),
@@ -111,14 +111,14 @@ class ShopRepo {
         id: 104,
         brand: "Uniqlo",
         image: "assets/images/blouse4.png",
-        title: "Casual Denim Blouse",
-        category: "women",
+        title: "بلوز جین کژوال",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Trendy and unique", stars: 4),
-          Rating(rating: "Good quality denim", stars: 5),
+          Rating(rating: "مدرن و خاص", stars: 4),
+          Rating(rating: "جنس جین عالی", stars: 5),
         ],
         description:
-            "Stylish denim blouse with button-down design, pairs well with jeans or skirts.",
+            "بلوز جین دکمه‌دار با طراحی شیک، مناسب برای استایل روزمره با شلوار یا دامن.",
         price: 59,
         categoryData: categories[0],
       ),
@@ -126,14 +126,14 @@ class ShopRepo {
         id: 105,
         brand: "Forever 21",
         image: "assets/images/blouse5.png",
-        title: "Off-Shoulder Blouse",
-        category: "women",
+        title: "بلوز دکلته",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Super cute for summer", stars: 5),
-          Rating(rating: "Runs a bit small", stars: 3),
+          Rating(rating: "خیلی بامزه برای تابستون", stars: 5),
+          Rating(rating: "کمی تنگ بود", stars: 3),
         ],
         description:
-            "Trendy off-shoulder blouse with a relaxed fit, ideal for summer days.",
+            "بلوزی مدرن با طراحی دکلته و فیت آزاد، مناسب روزهای گرم تابستانی.",
         price: 29,
         categoryData: categories[0],
       ),
@@ -142,14 +142,14 @@ class ShopRepo {
         id: 201,
         brand: "H&M",
         image: "assets/images/knitwear1.png",
-        title: "Chunky Oversized Sweater",
-        category: "men",
+        title: "پلیور ضخیم و آزاد",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Super warm and comfy!", stars: 5),
-          Rating(rating: "Perfect for winter", stars: 4),
+          Rating(rating: "خیلی گرم و راحت!", stars: 5),
+          Rating(rating: "عالی برای زمستون", stars: 4),
         ],
         description:
-            "A thick oversized knit sweater with a cozy feel, perfect for layering in cold weather.",
+            "پلیور ضخیم با بافت درشت و حس گرم و نرم، مناسب برای هوای سرد.",
         price: 69,
         categoryData: categories[2],
       ),
@@ -158,17 +158,14 @@ class ShopRepo {
         id: 202,
         brand: "Zara",
         image: "assets/images/knitwear2.png",
-        title: "Cropped Knit Cardigan",
-        category: "men",
+        title: "ژاکت بافت کوتاه",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Trendy and stylish", stars: 4),
-          Rating(rating: "Trendy and stylish", stars: 4),
-          Rating(rating: "Trendy and stylish", stars: 4),
-          Rating(rating: "Trendy and stylish", stars: 4),
-          Rating(rating: "Soft fabric", stars: 5),
+          Rating(rating: "شیک و مدرن", stars: 4),
+          Rating(rating: "پارچه نرم و راحت", stars: 5),
         ],
         description:
-            "A modern cropped cardigan with button closure, great for casual and semi-formal looks.",
+            "ژاکت بافت کوتاه با دکمه، مناسب استایل‌های روزمره و نیمه‌رسمی.",
         price: 55,
         categoryData: categories[2],
       ),
@@ -176,14 +173,14 @@ class ShopRepo {
         id: 203,
         brand: "Uniqlo",
         image: "assets/images/knitwear3.png",
-        title: "Classic Turtleneck Pullover",
-        category: "men",
+        title: "یقه اسکی کلاسیک",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Timeless design", stars: 5),
-          Rating(rating: "Keeps you warm", stars: 4),
+          Rating(rating: "طراحی ساده و شیک", stars: 5),
+          Rating(rating: "خیلی گرم و کاربردی", stars: 4),
         ],
         description:
-            "Slim fit turtleneck knit pullover made with fine wool blend, ideal for layering.",
+            "پلیور یقه‌اسکی بافت نازک از ترکیب پشم، مناسب برای پوشیدن زیر کت یا پالتو.",
         price: 79,
         categoryData: categories[2],
       ),
@@ -193,14 +190,14 @@ class ShopRepo {
         id: 301,
         brand: "Zara",
         image: "assets/images/pants1.png",
-        title: "High-Waist Wide-Leg Pants",
-        category: "men",
+        title: "شلوار دم‌پا گشاد با کمر بلند",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Super flattering fit", stars: 5),
-          Rating(rating: "Good for office wear", stars: 4),
+          Rating(rating: "استایل خیلی جذاب داره", stars: 5),
+          Rating(rating: "مناسب برای محیط کاری", stars: 4),
         ],
         description:
-            "Elegant high-waist pants with a wide-leg cut, perfect for formal and smart-casual looks.",
+            "شلوار رسمی با کمر بلند و دم‌پا گشاد، ایده‌آل برای استایل‌های شیک و کاری.",
         price: 89,
         categoryData: categories[3],
       ),
@@ -208,14 +205,14 @@ class ShopRepo {
         id: 302,
         brand: "H&M",
         image: "assets/images/pants2.png",
-        title: "Slim Fit Chino Pants",
-        category: "men",
+        title: "شلوار کتان اسلیم فیت",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Great everyday wear", stars: 4),
-          Rating(rating: "Comfortable material, but not my type", stars: 2),
+          Rating(rating: "مناسب استفاده روزمره", stars: 4),
+          Rating(rating: "جنسش خوب بود ولی سلیقه من نبود", stars: 2),
         ],
         description:
-            "Classic slim fit chino pants made with stretch cotton, versatile for casual and semi-formal outfits.",
+            "شلوار کتان با فیت جذب و خاصیت کشسانی، مناسب استایل‌های روزانه و نیمه‌رسمی.",
         price: 59,
         categoryData: categories[3],
       ),
@@ -223,14 +220,14 @@ class ShopRepo {
         id: 303,
         brand: "Uniqlo",
         image: "assets/images/pants3.png",
-        title: "Casual Cargo Pants",
-        category: "men",
+        title: "شلوار کارگو راحت",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Stylish and practical", stars: 5),
-          Rating(rating: "Lots of pockets", stars: 3),
+          Rating(rating: "استایل خیابونی و کاربردی", stars: 5),
+          Rating(rating: "جیب‌های زیاد داره", stars: 3),
         ],
         description:
-            "Trendy cargo pants with multiple utility pockets and a relaxed fit for casual streetwear style.",
+            "شلوار کارگو با طراحی آزاد و جیب‌های متعدد، مناسب استایل کژوال و اسپرت.",
         price: 65,
         categoryData: categories[3],
       ),
@@ -239,14 +236,14 @@ class ShopRepo {
         id: 401,
         brand: "Levi's",
         image: "assets/images/jeans1.png",
-        title: "Classic Straight-Leg Jeans",
-        category: "women",
+        title: "شلوار جین راسته کلاسیک",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Durable and comfy", stars: 5),
-          Rating(rating: "Perfect everyday jeans", stars: 4),
+          Rating(rating: "بادوام و راحت", stars: 5),
+          Rating(rating: "خیلی مناسب برای استفاده روزانه", stars: 4),
         ],
         description:
-            "Timeless straight-leg jeans made with durable denim, ideal for casual wear.",
+            "شلوار جین با برش راسته و پارچه مقاوم، مناسب استفاده روزمره.",
         price: 99,
         categoryData: categories[4],
       ),
@@ -254,14 +251,13 @@ class ShopRepo {
         id: 402,
         brand: "Zara",
         image: "assets/images/jeans2.png",
-        title: "High-Rise Skinny Jeans",
-        category: "women",
+        title: "شلوار جین جذب با کمر بلند",
+        category: "مردانه",
         ratings: [
-          Rating(rating: "Great stretch fit", stars: 4),
-          Rating(rating: "Very flattering", stars: 5),
+          Rating(rating: "کشش عالی و راحت", stars: 4),
+          Rating(rating: "فرم بدن رو خیلی خوب نشون میده", stars: 5),
         ],
-        description:
-            "Skinny jeans with a high-rise waist and stretchy material for maximum comfort.",
+        description: "شلوار جین جذب با کمر بلند و پارچه کشی، راحت و خوش‌فرم.",
         price: 79,
         categoryData: categories[4],
       ),
@@ -269,25 +265,18 @@ class ShopRepo {
         id: 403,
         brand: "H&M",
         image: "assets/images/jeans3.png",
-        title: "Relaxed Fit Ripped Jeans",
-        category: "boys",
+        title: "شلوار جین پسرانه پاره",
+        category: "پسرانه",
         ratings: [
-          Rating(rating: "Trendy ripped design", stars: 5),
+          Rating(rating: "طرح پاره خیلی جذابه", stars: 5),
           Rating(
-            rating:
-                "Looks great with sneakers and very nice looking on my dear boy which make him look really fantastic",
+            rating: "با کتانی خیلی قشنگ میشه و روی پسرم خیلی شیک وایمیسه",
             stars: 4,
           ),
-          Rating(rating: "Looks great with sneakers", stars: 4),
-          Rating(rating: "Looks great with sneakers", stars: 5),
-          Rating(rating: "Looks great with sneakers", stars: 2),
-          Rating(rating: "Looks great with sneakers", stars: 2),
-          Rating(rating: "Looks great with sneakers", stars: 3),
-          Rating(rating: "Looks great with sneakers", stars: 4),
-          Rating(rating: "Looks great with sneakers", stars: 1),
+          Rating(rating: "با کتانی خیلی خوب ست میشه", stars: 4),
         ],
         description:
-            "Casual relaxed-fit jeans featuring a distressed ripped style for a modern streetwear look.",
+            "شلوار جین آزاد با طرح پاره و استایل خیابونی مدرن، مناسب جوانان.",
         price: 69,
         categoryData: categories[4],
       ),
@@ -295,14 +284,13 @@ class ShopRepo {
         id: 501,
         brand: "Zara",
         image: "assets/images/skirts1.png",
-        title: "Pleated Midi Skirt",
-        category: "women",
+        title: "دامن پلیسه میدی",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Elegant and flowy", stars: 5),
-          Rating(rating: "Perfect for office and casual", stars: 4),
+          Rating(rating: "خیلی شیک و خوش‌فرم", stars: 5),
+          Rating(rating: "مناسب برای محل کار و استفاده روزانه", stars: 4),
         ],
-        description:
-            "A pleated midi skirt with a high waistline, versatile enough for both formal and casual occasions.",
+        description: "دامن پلیسه‌دار با کمر بلند، مناسب استایل رسمی و کژوال.",
         price: 65,
         categoryData: categories[5],
       ),
@@ -310,14 +298,14 @@ class ShopRepo {
         id: 502,
         brand: "H&M",
         image: "assets/images/skirts2.png",
-        title: "Denim Mini Skirt",
-        category: "women",
+        title: "دامن جین کوتاه",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Trendy and stylish", stars: 4),
-          Rating(rating: "Pairs well with sneakers", stars: 5),
+          Rating(rating: "شیک و به‌روز", stars: 4),
+          Rating(rating: "با کتانی خیلی خوب ست میشه", stars: 5),
         ],
         description:
-            "Casual denim mini skirts with a raw hem finish, perfect for summer streetwear looks.",
+            "دامن کوتاه از جنس جین با لبه‌های آزاد، مناسب استایل تابستانی و خیابانی.",
         price: 45,
         categoryData: categories[5],
       ),
@@ -325,19 +313,20 @@ class ShopRepo {
         id: 503,
         brand: "Uniqlo",
         image: "assets/images/skirts3.png",
-        title: "A-Line Maxi Skirt",
-        category: "women",
+        title: "دامن بلند خط A",
+        category: "زنانه",
         ratings: [
-          Rating(rating: "Comfortable and modest", stars: 5),
-          Rating(rating: "Great fabric quality", stars: 4),
+          Rating(rating: "راحت و پوشیده", stars: 5),
+          Rating(rating: "کیفیت پارچه عالیه", stars: 4),
         ],
         newProduct: true,
         description:
-            "A-line maxi skirts made with lightweight cotton blend fabric, ideal for elegant casual wear.",
+            "دامن بلند با برش A و پارچه سبک پنبه‌ای، مناسب استایل شیک و روزمره.",
         price: 75,
         categoryData: categories[5],
       ),
     ];
+
     if (product != null && index != null) {
       products.removeAt(index);
       products.insert(index, product);
@@ -346,7 +335,7 @@ class ShopRepo {
   }
 
   Future<Product?> getProductById(int id) async {
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future.delayed(Duration(milliseconds: 1000));
     final products = await getProducts();
     return products.firstWhere((e) => e.id == id);
   }
@@ -428,19 +417,14 @@ class ShopRepo {
     }
 
     if (category != null) {
-      print('category');
-      print(category);
-      products = products.where((e) => e.category.contains(category)).toList();
+      products = products.where((e) => e.category == category).toList();
     }
 
     if (colors != null && colors.isNotEmpty) {
-      print('colors');
       List<bool> temp = [];
       List<Product> tempProducts = [];
       for (var element in products) {
         for (var e in colors) {
-          print('sizes.contains(e)');
-          print('${element.colors.contains(e)} $e');
           temp.add(element.colors.contains(e));
         }
         if (!temp.contains(false)) {
@@ -451,11 +435,9 @@ class ShopRepo {
       products = tempProducts;
     }
     if (brands != null && brands.isNotEmpty) {
-      print('brands');
       products = products.where((e) => brands.contains(e.brand)).toList();
     }
     if (sizes != null && sizes.isNotEmpty) {
-      print('sizes');
       List<bool> temp = [];
       List<Product> tempProducts = [];
       for (var element in products) {

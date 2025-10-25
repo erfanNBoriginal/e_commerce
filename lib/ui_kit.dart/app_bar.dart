@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 
 class AppBar extends StatelessWidget {
   final String title;
+  final bool back;
   final Widget? action;
-  const AppBar({super.key, required this.title, this.action});
+  const AppBar({super.key, required this.title, this.action, this.back = true});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class AppBar extends StatelessWidget {
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // if (action != null)
           Padding(
             padding: EdgeInsets.all(11),
             child: SizedBox.square(
@@ -22,19 +24,23 @@ class AppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          U.Text(title),
+          Padding(padding: const EdgeInsets.all(11.0), child: U.Text(title)),
           Spacer(),
 
+          // if (back)
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: () {
-                GoRouter.of(context).pop();
-              },
-              child: SizedBox(
-                child: U.Image.Icon(size: 24, image: U.Icons.chevron),
-              ),
-            ),
+            child:
+                !back
+                    ? SizedBox(height: 24, width: 24)
+                    : InkWell(
+                      onTap: () {
+                        GoRouter.of(context).pop();
+                      },
+                      child: SizedBox(
+                        child: U.Image.Icon(size: 24, image: U.Icons.chevron),
+                      ),
+                    ),
           ),
         ],
       ),

@@ -27,12 +27,13 @@ class CategoryPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create:
-              (context) => CategoryCubit(
-                id: id,
-                repo: context.read<ShopRepo>(),
-                initial: initial,
-              ),
+          create: (context) {
+            return CategoryCubit(
+              id: id,
+              repo: context.read<ShopRepo>(),
+              initial: initial,
+            );
+          },
         ),
         BlocProvider(
           create:
@@ -53,96 +54,80 @@ class CategoryPage extends StatelessWidget {
         child: BlocBuilder<CategoryCubit, CategoryState>(
           builder: (context, state) {
             final categoyCubit = context.read<CategoryCubit>();
-            return state.loading
-                ? Center(child: CircularProgressIndicator())
-                : Scaffold(
-                  body: Column(
-                    children: [
-                      U.AppBar(title: state.category?.title ?? 'Category'),
-                      SizedBox(height: 10),
-                      Container(
-                        color: U.Theme.background,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              U.Image.Icon(image: U.Icons.filter),
-                              SizedBox(width: 7),
-                              GestureDetector(
-                                onTap: () {
-                                  CategoryFilterDialog.show(
-                                    context,
-                                    categoryCubit:
-                                        context.read<CategoryCubit>(),
-                                  );
-                                  // showDialog(
-                                  //   context: context,
-                                  //   barrierDismissible:
-                                  //       false, // prevents closing on tap outside
-                                  //   builder: (context) {
-                                  //     return
-                                  //   },
-                                  // );
-
-                                  // GoRouter.of(context).pushNamed(
-                                  //   pathParameters: {'id': id.toString()},
-                                  //   FiltersPage.path,
-                                  //   extra: categoyCubit,
-                                  // );
-                                },
-                                child: U.Text('Filters'),
-                              ),
-                              U.Image.Icon(image: U.Icons.highlow),
-                              SizedBox(width: 7),
-                              GestureDetector(
-                                onTap: () {
-                                  SortBottomSheet.show(
-                                    context,
-                                    categoryCubit:
-                                        context.read<CategoryCubit>(),
-                                  );
-                                },
-                                child: U.Text(
-                                  state.selectedSortCategory == ''
-                                      ? 'price : highest to lowest'
-                                      : state.selectedSortCategory,
-                                ),
-                              ),
-                              U.Image.Icon(image: U.Icons.viewList),
-                            ],
+            return Scaffold(
+              body: Column(
+                children: [
+                  U.AppBar(title: state.category?.title ?? 'دسته بندی'),
+                  SizedBox(height: 10),
+                  Container(
+                    color: U.Theme.background,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          U.Image.Icon(image: U.Icons.filter),
+                          SizedBox(width: 7),
+                          GestureDetector(
+                            onTap: () {
+                              CategoryFilterDialog.show(
+                                context,
+                                categoryCubit: context.read<CategoryCubit>(),
+                              );
+                            },
+                            child: U.Text('فیلتر ها'),
                           ),
-                        ),
-                      ),
-                      SizedBox(height: 17),
-                      state.loading
-                          ? Expanded(
-                            child: Center(child: CircularProgressIndicator()),
-                          )
-                          : Expanded(
-                            child: GridView.builder(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              itemCount: state.products.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 16,
-                                    mainAxisSpacing: 26,
-                                    // mainAxisExtent: MediaQuery.of(context).size.height * 0.43,
-                                    childAspectRatio: 1.1 / 2,
-                                  ),
-                              itemBuilder: (context, index) {
-                                return ProductCard(
-                                  // height: ,
-                                  width: 185,
-                                  product: state.products[index],
-                                );
-                              },
+                          U.Image.Icon(image: U.Icons.highlow),
+                          SizedBox(width: 7),
+                          GestureDetector(
+                            onTap: () {
+                              SortBottomSheet.show(
+                                context,
+                                categoryCubit: context.read<CategoryCubit>(),
+                              );
+                            },
+                            child: U.Text(
+                              state.selectedSortCategory == ''
+                                  ? 'قیمت: از بیشتر به کمتر'
+                                  : state.selectedSortCategory,
                             ),
                           ),
-                    ],
+                          U.Image.Icon(image: U.Icons.viewList),
+                        ],
+                      ),
+                    ),
                   ),
-                );
+                  state.loading
+                      ? Center(child: CircularProgressIndicator())
+                      : SizedBox(height: 17),
+                  // state.loading
+                  //     ? Expanded(
+                  //       child: Center(child: CircularProgressIndicator()),
+                  //     )
+                  //     :
+                  Expanded(
+                    child: GridView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: state.products.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 26,
+                        // mainAxisExtent: MediaQuery.of(context).size.height * 0.43,
+                        childAspectRatio: 1.1 / 2,
+                      ),
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                          // height: ,
+                          width: 185,
+                          product: state.products[index],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
           },
         ),
       ),

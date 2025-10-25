@@ -5,10 +5,12 @@ class BottomSheet extends StatelessWidget {
   static show(
     BuildContext context, {
     double? maxWidth,
+    bool useNavKey = false,
     double? maxHeight,
     required Widget Function(BuildContext context) builder,
   }) {
     return showModalBottomSheet(
+      useRootNavigator: useNavKey,
       context: context,
       isScrollControlled: true,
       constraints: BoxConstraints(

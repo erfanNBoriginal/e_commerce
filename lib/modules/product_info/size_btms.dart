@@ -76,33 +76,7 @@ class SizeBottomSheet extends StatelessWidget {
                   // print('state.bagItems.length');
                   // print(state.bagItems.length);
                   // print(state.)
-                  return
-                  //  Container(color: Colors.red, width: 22, height: 22);
-                  // temp.size == widget.product.sizes[index]
-                  state.bagItems.indexWhere((e) {
-                            return e.product.id == product.id;
-                          }) ==
-                          -1
-                      ? NotSelectedButton(
-                        onPressed: () {
-                          // print(temp!.product.title);
-
-                          // selectedSize = widget.product.sizes[index];
-                          bagCubit.onSizeSelected(
-                            product: product,
-                            size: product.sizes[index],
-                          );
-                          // selectedSize = widget.product.sizes[index];
-                          // setState(() {});
-                        },
-                        title: product.sizes[index],
-                      )
-                      : state
-                              .bagItems[state.bagItems.indexWhere((e) {
-                                return e.product.id == product.id;
-                              })]
-                              .size ==
-                          product.sizes[index]
+                  return state.bagItem?.size == product.sizes[index]
                       ? U.Button(
                         title: product.sizes[index],
                         size: U.ButtonSize.s,
@@ -118,6 +92,9 @@ class SizeBottomSheet extends StatelessWidget {
                       )
                       : NotSelectedButton(
                         onPressed: () {
+                          // print(temp!.product.title);
+
+                          // selectedSize = widget.product.sizes[index];
                           bagCubit.onSizeSelected(
                             product: product,
                             size: product.sizes[index],
@@ -127,6 +104,9 @@ class SizeBottomSheet extends StatelessWidget {
                         },
                         title: product.sizes[index],
                       );
+                  //  Container(color: Colors.red, width: 22, height: 22);
+                  // temp.size == widget.product.sizes[index]
+
                   // selectedSize == widget.product.sizes[index]
                   //     ? U.Button(
                   //       title: widget.product.sizes[index],
@@ -145,6 +125,72 @@ class SizeBottomSheet extends StatelessWidget {
                   //       },
                   //       title: widget.product.sizes[index],
                   //     );
+                  // state.bagItems.indexWhere((e) {
+                  //           return e.product.id == product.id;
+                  //         }) ==
+                  //         -1
+                  //     ? NotSelectedButton(
+                  //       onPressed: () {
+                  //         // print(temp!.product.title);
+
+                  //         // selectedSize = widget.product.sizes[index];
+                  //         bagCubit.onSizeSelected(
+                  //           product: product,
+                  //           size: product.sizes[index],
+                  //         );
+                  //         // selectedSize = widget.product.sizes[index];
+                  //         // setState(() {});
+                  //       },
+                  //       title: product.sizes[index],
+                  //     )
+                  //     : state
+                  //             .bagItems[state.bagItems.indexWhere((e) {
+                  //               return e.product.id == product.id;
+                  //             })]
+                  //             .size ==
+                  //         product.sizes[index]
+                  //     ? U.Button(
+                  //       title: product.sizes[index],
+                  //       size: U.ButtonSize.s,
+                  //       onTap: () {
+                  //         // cubit.onProductSizeChanged(
+                  //         //   widget.product.sizes[index],
+                  //         // );
+                  //         // selectedSize = '';
+                  //         // setState(() {});
+                  //       },
+                  //       bordeRaius: U.Theme.r8,
+                  //       color: U.Theme.primary,
+                  //     )
+                  //     : NotSelectedButton(
+                  //       onPressed: () {
+                  //         bagCubit.onSizeSelected(
+                  //           product: product,
+                  //           size: product.sizes[index],
+                  //         );
+                  //         // selectedSize = widget.product.sizes[index];
+                  //         // setState(() {});
+                  //       },
+                  //       title: product.sizes[index],
+                  //     );
+                  // // selectedSize == widget.product.sizes[index]
+                  // //     ? U.Button(
+                  // //       title: widget.product.sizes[index],
+                  // //       size: U.ButtonSize.s,
+                  // //       onTap: () {
+                  // //         selectedSize = '';
+                  // //         setState(() {});
+                  // //       },
+                  // //       bordeRaius: U.Theme.r8,
+                  // //       color: U.Theme.primary,
+                  // //     )
+                  // //     : NotSelectedButton(
+                  // //       onPressed: () {
+                  // //         selectedSize = widget.product.sizes[index];
+                  // //         setState(() {});
+                  // //       },
+                  // //       title: widget.product.sizes[index],
+                  // //     );
                 },
               ),
             ),

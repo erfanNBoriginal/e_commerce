@@ -18,12 +18,12 @@ class ShopPage extends StatelessWidget {
           return ListView(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // U.AppBar(title: 'categories'),
+              U.AppBar(back: false, title: 'دسته بندی ها'),
               SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: U.Button(
-                  title: 'view all items',
+                  title: 'مشاهده همه آیتم ها',
                   size: U.ButtonSize.l,
                   onTap: () {},
                   bordeRaius: U.Theme.r25,
@@ -33,12 +33,10 @@ class ShopPage extends StatelessWidget {
               SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: U.Text('Choose category', color: U.Theme.gray),
+                child: U.Text('دسته بندی انتخاب کن', color: U.Theme.gray),
               ),
               SizedBox(height: 17),
-              ...state.categories.map(
-                (e) => CategoryText(id: e.id, title: e.title),
-              ),
+              ...state.categories.map((e) => CategoryText(category: e)),
               SizedBox(height: 111),
               // SizedBox(
               //   height: 482,

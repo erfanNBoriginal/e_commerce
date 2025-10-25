@@ -39,7 +39,7 @@ class IconButton extends StatelessWidget {
           onTap: onTap,
           child: Padding(
             padding: EdgeInsets.all(getSize.padding),
-            child: U.Image.Icon(boxfit: BoxFit.contain, size: 5, image: icon),
+            child: U.Image.Icon(boxfit: BoxFit.contain, image: icon),
           ),
         ),
       ),

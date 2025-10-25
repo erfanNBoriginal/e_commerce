@@ -212,7 +212,7 @@ class _GalleryPageState extends State<GalleryPage> {
           U.Text('Counter:', fontSize: U.TextSize.s18),
           SizedBox(height: 12),
 
-          U.Counter(count: 2),
+          U.Counter(count: 2, onAdded: () {}, onIncremented: () {}),
           SizedBox(height: 22),
 
           U.Text('SearchInput::', fontSize: U.TextSize.s18),

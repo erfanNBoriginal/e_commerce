@@ -16,6 +16,9 @@ abstract class Icons {
   static const dropdown = 'assets/icons/dropdown.png';
   static const favorite = 'assets/icons/favorites.png';
   static const home = 'assets/icons/home.png';
+  static const arrowForward = 'assets/icons/arrowForward.png';
+  static const more = 'assets/icons/more.png';
+  static const bagActive = 'assets/icons/bagActive.png';
   static const remove = 'assets/icons/remove.png';
   static const pen = 'assets/icons/pen.png';
   static const homeActivate = 'assets/icons/homeActive.png';

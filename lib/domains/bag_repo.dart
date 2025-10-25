@@ -1,18 +1,39 @@
 import 'package:e_commerce/domains/models/bag_item.dart';
+import 'package:e_commerce/domains/models/promod_code.dart';
 
 class BagRepo {
   List<BagItem> _bagItems = [];
 
-  // void addTempItems(List<BagItem> items) {
-  //   _bagItems = items;
-  //   print(
-  //     '${_bagItems[0].size} ${_bagItems[0].count} ${_bagItems[0].product.title}',
-  //   );
-  // }
-
   Future<List<BagItem>> getBagItems() async {
-    Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: 1000));
     return _bagItems;
+  }
+
+  Future<List<PromodCode>> getPromoCodes() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    return [
+      PromodCode(
+        image: 'assets/images/20off.png',
+        remainingDays: '6 days',
+        type: 'my personal offer',
+        name: 'my promocode 2020',
+        percent: 20,
+      ),
+      PromodCode(
+        image: 'assets/images/10off.png',
+        remainingDays: '22 days',
+        type: 'summer sale',
+        name: 'summer 2020',
+        percent: 20,
+      ),
+      PromodCode(
+        image: 'assets/images/15off.png',
+        remainingDays: '15 days',
+        type: 'new',
+        name: 'new 2021',
+        percent: 20,
+      ),
+    ];
   }
 
   Future<void> addToBag(List<BagItem> bagItems) async {

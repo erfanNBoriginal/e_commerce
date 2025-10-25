@@ -26,7 +26,7 @@ class StrorePage extends StatelessWidget {
         ),
       ],
       child: BlocListener<HomeCubit, HomeState>(
-        listenWhen: (previous, current) => current.selectedIndex == 1,
+        listenWhen: (previous, current) => current.selectedIndex == 0,
         listener: (context, state) {
           print('listneddddddd store');
           final favCubit = context.read<FavoriteCubit>();

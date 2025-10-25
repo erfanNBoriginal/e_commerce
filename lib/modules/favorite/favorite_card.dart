@@ -133,7 +133,7 @@ class FavoriteCard extends StatelessWidget {
                         .firstOrNull;
                 return Positioned(
                   left: 1,
-                  bottom: 60,
+                  top: 180,
                   child:
                       temp == null
                           ? InkWell(

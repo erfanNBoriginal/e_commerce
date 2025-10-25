@@ -4,8 +4,15 @@ import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 
 class Counter extends StatelessWidget {
   final int count;
+  final void Function() onAdded;
+  final void Function() onIncremented;
 
-  const Counter({super.key, required this.count});
+  const Counter({
+    super.key,
+    required this.count,
+    required this.onAdded,
+    required this.onIncremented,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class Counter extends StatelessWidget {
         U.IconButton(
           size: IconButtonSize.small,
           icon: U.Icons.add,
-          onTap: () {},
+          onTap: onAdded,
         ),
         SizedBox(width: 16),
         Text(count.toString()),
@@ -22,7 +29,7 @@ class Counter extends StatelessWidget {
         U.IconButton(
           size: IconButtonSize.small,
           icon: U.Icons.minus,
-          onTap: () {},
+          onTap: onIncremented,
         ),
       ],
     );

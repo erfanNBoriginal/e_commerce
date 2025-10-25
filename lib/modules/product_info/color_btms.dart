@@ -20,7 +20,6 @@ class ColorBottomSheet extends StatelessWidget {
       maxWidth: 450,
       maxHeight: 368,
       context,
-
       builder: (context) {
         return MultiBlocProvider(
           providers: [BlocProvider.value(value: bagCubit)],
@@ -38,11 +37,8 @@ class ColorBottomSheet extends StatelessWidget {
     final bagCubit = context.read<BagCubit>();
     return BlocBuilder<BagCubit, BagState>(
       builder: (context, state) {
-        final List<BagItem> f = state.bagItems;
-        final temp =
-            f.where((e) {
-              return e.product == product;
-            }).firstOrNull;
+        final temp = state.bagItem;
+
         return ListView(
           children: [
             Center(

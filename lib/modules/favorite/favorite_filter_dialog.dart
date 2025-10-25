@@ -1,3 +1,4 @@
+import 'package:e_commerce/brands_dialog.dart';
 import 'package:e_commerce/modules/favorite/cubit/favorite_cubit.dart';
 import 'package:e_commerce/modules/product_info/not_selected_button.dart';
 import 'package:e_commerce/modules/product_info/select_color.dart';
@@ -201,11 +202,7 @@ class FavoriteFilterDialog extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
-                        // GoRouter.of(context).pushNamed(
-                        //   BrandsPage.path,
-                        //   pathParameters: {'id': id.toString()},
-                        //   extra: favCubit,
-                        // );
+                        BrandsDialog.show(context, favoriteCubit: favCubit);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
