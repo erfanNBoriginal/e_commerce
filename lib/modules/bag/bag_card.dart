@@ -16,14 +16,10 @@ class BagCard extends StatelessWidget {
     final favCubit = context.read<FavoriteCubit>();
     final bagCubit = context.read<BagCubit>();
     return Padding(
-      padding: EdgeInsets.only(left: 16, right: 16, bottom: 22),
-      child: Container(
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
+      child: U.Card(
         height: 116,
         // width: 44,
-        decoration: BoxDecoration(
-          color: U.Theme.white,
-          borderRadius: BorderRadius.circular(8),
-        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,

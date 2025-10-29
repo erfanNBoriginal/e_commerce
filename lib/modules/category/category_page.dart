@@ -57,48 +57,70 @@ class CategoryPage extends StatelessWidget {
             return Scaffold(
               body: Column(
                 children: [
-                  U.AppBar(title: state.category?.title ?? 'دسته بندی'),
+                  U.AppBar( havElevation: false, title: state.category?.title ?? 'دسته بندی'),
                   SizedBox(height: 10),
                   Container(
+                     padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 16.0),
+                    decoration: BoxDecoration(
                     color: U.Theme.background,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          U.Image.Icon(image: U.Icons.filter),
-                          SizedBox(width: 7),
-                          GestureDetector(
-                            onTap: () {
-                              CategoryFilterDialog.show(
-                                context,
-                                categoryCubit: context.read<CategoryCubit>(),
-                              );
-                            },
-                            child: U.Text('فیلتر ها'),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 4),
+                          color: const Color.fromARGB(20, 0, 0, 0),
+                          spreadRadius: 1,
+                          blurRadius: 4
+                        )
+                      ]
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        U.Image.Icon(image: U.Icons.filter),
+                        SizedBox(width: 7),
+                        GestureDetector(
+                          onTap: () {
+                            CategoryFilterDialog.show(
+                              context,
+                              categoryCubit: context.read<CategoryCubit>(),
+                            );
+                          },
+                          child: U.Text('فیلتر ها'),
+                        ),
+                        U.Image.Icon(image: U.Icons.highlow),
+                        SizedBox(width: 7),
+                        GestureDetector(
+                          onTap: () {
+                            SortBottomSheet.show(
+                              context,
+                              categoryCubit: context.read<CategoryCubit>(),
+                            );
+                          },
+                          child: U.Text(
+                            state.selectedSortCategory == ''
+                                ? 'قیمت: از بیشتر به کمتر'
+                                : state.selectedSortCategory,
                           ),
-                          U.Image.Icon(image: U.Icons.highlow),
-                          SizedBox(width: 7),
-                          GestureDetector(
-                            onTap: () {
-                              SortBottomSheet.show(
-                                context,
-                                categoryCubit: context.read<CategoryCubit>(),
-                              );
-                            },
-                            child: U.Text(
-                              state.selectedSortCategory == ''
-                                  ? 'قیمت: از بیشتر به کمتر'
-                                  : state.selectedSortCategory,
-                            ),
-                          ),
-                          U.Image.Icon(image: U.Icons.viewList),
-                        ],
-                      ),
+                        ),
+                        U.Image.Icon(image: U.Icons.viewList),
+                      ],
                     ),
                   ),
                   state.loading
-                      ? Center(child: CircularProgressIndicator())
+                      ? SizedBox(
+                        height: MediaQuery.of(context).size.height -154,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // SizedBox(height: 555,),
+                            // Spacer(),
+                            CircularProgressIndicator(),
+                            // Spacer(),
+                          ],
+                        ),
+                      )
                       : SizedBox(height: 17),
                   // state.loading
                   //     ? Expanded(

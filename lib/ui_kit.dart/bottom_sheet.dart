@@ -32,6 +32,7 @@ class BottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: U.Theme.background,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(34),
           topRight: Radius.circular(34),

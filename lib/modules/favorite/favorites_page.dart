@@ -43,14 +43,29 @@ class FavoritesPage extends StatelessWidget {
             return Scaffold(
               body: Column(
                 children: [
-                  U.AppBar(back: false, title: 'favorites'),
-                  SizedBox(height: 10),
+                  U.AppBar(back: false, 
+                  havElevation: false,
+                  title: 'Favorites'),
+                  SizedBox(height: 5),
                   state.loading
                       ? Expanded(
                         child: Center(child: CircularProgressIndicator()),
                       )
-                      : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      : Container(
+                         padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 16.0),
+                    decoration: BoxDecoration(
+                    color: U.Theme.background,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 4),
+                          color: const Color.fromARGB(20, 0, 0, 0),
+                          spreadRadius: 1,
+                          blurRadius: 4
+                        )
+                      ]
+                    ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -84,7 +99,7 @@ class FavoritesPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
 
                   Expanded(
                     child: GridView.builder(

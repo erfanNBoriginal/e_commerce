@@ -3,11 +3,13 @@ import 'package:e_commerce/domains/favorite_repo.dart';
 import 'package:e_commerce/modules/bag/bag_card.dart';
 import 'package:e_commerce/modules/bag/cubit/bag_cubit.dart';
 import 'package:e_commerce/modules/bag/promo_btms.dart';
+import 'package:e_commerce/modules/checkout/checkout_page.dart';
 import 'package:e_commerce/modules/favorite/cubit/favorite_cubit.dart';
 import 'package:e_commerce/modules/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class BagPage extends StatelessWidget {
   static const path = '/bag';
@@ -38,7 +40,7 @@ class BagPage extends StatelessWidget {
               body: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  U.AppBar(title: 'سبد', back: false),
+                  U.AppBar(havElevation: false, back: false),
                   SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -52,6 +54,8 @@ class BagPage extends StatelessWidget {
                   // ...state.bagItems.map((e) => BagCard(bagItem: e)),
                   BlocBuilder<FavoriteCubit, FavoriteState>(
                     builder: (context, fstate) {
+                      print('state.bagItems.length');
+                      print(state.bagItems.length);
                       final temp = fstate.favorites;
                       return Expanded(
                         flex: 1,
@@ -125,10 +129,9 @@ class BagPage extends StatelessWidget {
                       title: 'پرداخت',
                       size: U.ButtonSize.l,
                       onTap: () {
-                        PromoBottomSheet.show(
-                          context,
-                          bagCubit: context.read<BagCubit>(),
-                        );
+                       GoRouter.of(context).pushNamed(
+                        extra: state.bagItems,
+                        CheckoutPage.path);
                       },
                       bordeRaius: U.Theme.r25,
                       color: U.Theme.primary,

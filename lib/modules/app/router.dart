@@ -4,6 +4,7 @@ import 'package:e_commerce/modules/category/brands.dart';
 import 'package:e_commerce/modules/category/category_page.dart';
 import 'package:e_commerce/modules/category/cubit/category_cubit.dart';
 import 'package:e_commerce/modules/category/filters_page.dart';
+import 'package:e_commerce/modules/checkout/checkout_page.dart';
 import 'package:e_commerce/modules/favorite/favorites_page.dart';
 import 'package:e_commerce/modules/home/home.dart';
 import 'package:e_commerce/modules/rating/rating_page.dart';
@@ -28,6 +29,7 @@ final router = GoRouter(
         bool check() {
           if (state.fullPath!.contains(FiltersPage.path) ||
               state.fullPath!.contains(ProductInfoPage.path) ||
+              state.fullPath!.contains(CheckoutPage.path) ||
               state.fullPath!.contains(RatingPage.path)) {
             return true;
           }
@@ -186,6 +188,14 @@ final router = GoRouter(
               path: BagPage.path,
               name: BagPage.path,
               builder: (context, state) => BagPage(),
+            routes: [
+              GoRoute(path: CheckoutPage.path,
+              name: CheckoutPage.path,
+              builder: (context, state) => CheckoutPage(
+                bagItems: state.extra as dynamic,
+              ),
+              )
+            ]
             ),
           ],
         ),

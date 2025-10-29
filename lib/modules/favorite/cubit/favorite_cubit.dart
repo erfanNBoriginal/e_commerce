@@ -35,6 +35,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     emit(
       state.copyWith(
         favorites: res,
+        selectedBrands: brands,
         loading: false,
         categories: categories,
         brands: brands,

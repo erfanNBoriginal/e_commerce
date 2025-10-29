@@ -113,10 +113,11 @@ class FavoriteRepo {
       products = tempProducts;
     }
     if (minvalue != null && maxValue != null) {
-      products =
+     final temp = products =
           products
               .where((e) => e.price >= minvalue && e.price <= maxValue)
               .toList();
+              products = temp;
     }
     filteredFavorites =
         favorites.where((fav) => products.contains(fav.product)).toList();

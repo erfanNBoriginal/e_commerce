@@ -1,4 +1,5 @@
 export './text_button.dart';
+export './card.dart';
 export './image.dart';
 export './counter.dart';
 export './outline_button.dart';

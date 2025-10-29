@@ -55,6 +55,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       state.copyWith(
         categories: categories,
         category: res,
+        selectedBrands: brands,
         brands: brands,
         colors: colors,
         sizes: sizes,

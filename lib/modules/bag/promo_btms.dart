@@ -25,30 +25,33 @@ class PromoBottomSheet extends StatelessWidget {
     final bagCubit = context.read<BagCubit>();
     return BlocBuilder<BagCubit, BagState>(
       builder: (context, state) {
-        return ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: U.TextInput(
-                title: 'کد تخفیف خود را وارد کنید',
-                textCtrl: bagCubit.textCtrl,
+        return Scaffold(
+          backgroundColor: U.Theme.background,
+          body: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: U.TextInput(
+                  title: 'کد تخفیف خود را وارد کنید',
+                  textCtrl: bagCubit.textCtrl,
+                ),
               ),
-            ),
-            SizedBox(height: 30),
-            U.Text(
-              'کد های تخفیف قابل استفاده',
-              weight: U.TextWeight.semiBold,
-              fontSize: U.TextSize.s18,
-            ),
-            SizedBox(height: 18),
-            ...state.promoCodes.map((e) {
-              return PromoCard(
-                loading: state.selectedCode == e && state.loading,
-                isSelected: state.selectedCode?.name == e.name,
-                code: e,
-              );
-            }),
-          ],
+              SizedBox(height: 30),
+              U.Text(
+                'کد های تخفیف قابل استفاده',
+                weight: U.TextWeight.semiBold,
+                fontSize: U.TextSize.s18,
+              ),
+              SizedBox(height: 18),
+              ...state.promoCodes.map((e) {
+                return PromoCard(
+                  loading: state.selectedCode == e && state.loading,
+                  isSelected: state.selectedCode?.name == e.name,
+                  code: e,
+                );
+              }),
+            ],
+          ),
         );
       },
     );

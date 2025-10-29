@@ -21,6 +21,9 @@ abstract class Icons {
   static const bagActive = 'assets/icons/bagActive.png';
   static const remove = 'assets/icons/remove.png';
   static const pen = 'assets/icons/pen.png';
+  static const question = 'assets/icons/question.png';
+  static const post = 'assets/images/post.png';
+  static const tipax = 'assets/images/tipax.png';
   static const homeActivate = 'assets/icons/homeActive.png';
   static const bagButton = 'assets/icons/bagButton.png';
   static const thumbUp = 'assets/icons/thumb_up.png';
