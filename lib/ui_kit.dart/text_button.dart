@@ -16,7 +16,9 @@ class TextButton extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: onTap,
-        child: Padding(padding: const EdgeInsets.all(2.5), child: U.Text(
+        child: Padding( 
+          padding: const EdgeInsets.symmetric(horizontal: 9.0,vertical: 3),
+          child: U.Text(
           color: color,
           text)),
       ),

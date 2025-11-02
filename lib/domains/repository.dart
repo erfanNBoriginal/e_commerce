@@ -4,7 +4,7 @@ import 'package:e_commerce/domains/models/rating.dart';
 
 class Repository {
   Future<List<CategoryData>> getCategories() async {
-    Future.delayed(Duration(milliseconds: 100));
+await    Future.delayed(Duration(milliseconds: 100));
     return [
       CategoryData(id: 1, title: 'بلوز'),
       CategoryData(id: 2, title: 'کت'),
@@ -22,7 +22,7 @@ class Repository {
   }
 
   Future<List<Product>> getSaleProducts() async {
-    Future.delayed(Duration(milliseconds: 120));
+   await Future.delayed(Duration(milliseconds: 120));
     final categories = await getCategories();
     return [
       Product(

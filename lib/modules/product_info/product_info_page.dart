@@ -185,8 +185,12 @@ class ProductInfoPage extends StatelessWidget {
                             ),
                           ),
 
-                          Divider(thickness: 0.4),
-                          SizedBox(height: 16),
+                          // Divider(thickness: 0.4),
+                              Container(
+              color: U.Theme.gray,height: 0.2,
+            width: double.infinity,
+            ),
+                          // SizedBox(height: 16),
                           InkWell(
                             onTap: () {
                               GoRouter.of(context).pushNamed(
@@ -197,57 +201,79 @@ class ProductInfoPage extends StatelessWidget {
                                 RatingPage.path,
                               );
                             },
+                            child: Container(height: 60,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                children: [
+                                  // SizedBox(width: 15),
+                                  U.Text(
+                                    'اطلاعات آیتم ها',
+                                    weight: U.TextWeight.regular,
+                                    fontSize: U.TextSize.s16,
+                                  ),
+                                  Spacer(),
+                                  U.Image.Icon(image: U.Icons.chevron),
+                                  // SizedBox(width: 11),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // SizedBox(height: 16),
+                          //    Divider(thickness: 0.4),
+                          // Divider(thickness: 0.4),
+                              Container(
+              color: U.Theme.gray,height: 0.2,
+            width: double.infinity,
+            ),
+                          // SizedBox(height: 16),
+                          Container(
+                            height: 60,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+
                             child: Row(
                               children: [
-                                SizedBox(width: 15),
+                                // SizedBox(width: 15),
                                 U.Text(
-                                  'اطلاعات آیتم ها',
+                                  'اطلاعات ارساا',
                                   weight: U.TextWeight.regular,
                                   fontSize: U.TextSize.s16,
                                 ),
                                 Spacer(),
                                 U.Image.Icon(image: U.Icons.chevron),
-                                SizedBox(width: 11),
+                                // SizedBox(width: 11),
                               ],
                             ),
                           ),
-                          SizedBox(height: 16),
+                          // SizedBox(height: 16),
                           //    Divider(thickness: 0.4),
-                          Divider(thickness: 0.4),
-                          SizedBox(height: 16),
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              U.Text(
-                                'اطلاعات ارساا',
-                                weight: U.TextWeight.regular,
-                                fontSize: U.TextSize.s16,
-                              ),
-                              Spacer(),
-                              U.Image.Icon(image: U.Icons.chevron),
-                              SizedBox(width: 11),
-                            ],
+                         Container(
+              color: U.Theme.gray,height: 0.2,
+            width: double.infinity,
+            ),
+                          // SizedBox(height: 16),
+                          Container(
+                            height: 60,
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 15),
+                                U.Text(
+                                  'خدمات',
+                                  weight: U.TextWeight.regular,
+                            
+                                  fontSize: U.TextSize.s16,
+                                ),
+                                Spacer(),
+                                U.Image.Icon(image: U.Icons.chevron),
+                                // SizedBox(width: 11),
+                              ],
+                            ),
                           ),
-                          SizedBox(height: 16),
-                          //    Divider(thickness: 0.4),
-                          Divider(thickness: 0.4),
-                          SizedBox(height: 16),
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              U.Text(
-                                'خدمات',
-                                weight: U.TextWeight.regular,
-
-                                fontSize: U.TextSize.s16,
-                              ),
-                              Spacer(),
-                              U.Image.Icon(image: U.Icons.chevron),
-                              SizedBox(width: 11),
-                            ],
-                          ),
-                          SizedBox(height: 16),
-                          Divider(thickness: 0.4),
+                          // SizedBox(height: 16),
+                          Container(
+              color: U.Theme.gray,height: 0.2,
+            width: double.infinity,
+            ),
                           SizedBox(height: 16),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -288,7 +314,9 @@ class ProductInfoPage extends StatelessWidget {
                                     ? state.bagItem
                                     : null;
                             return state.loading
-                                ? Center(child: CircularProgressIndicator())
+                                ? SizedBox(
+                                  height: 70,
+                                  child: Center(child: CircularProgressIndicator()))
                                 : Container(
                                   color: U.Theme.white,
                                   height: 70,

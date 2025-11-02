@@ -8,6 +8,8 @@ import 'package:e_commerce/modules/checkout/checkout_page.dart';
 import 'package:e_commerce/modules/favorite/favorites_page.dart';
 import 'package:e_commerce/modules/home/home.dart';
 import 'package:e_commerce/modules/rating/rating_page.dart';
+import 'package:e_commerce/modules/profile/orders_page.dart';
+import 'package:e_commerce/modules/profile/settings_page.dart';
 import 'package:e_commerce/modules/shop/shop_page.dart';
 import 'package:e_commerce/modules/product_info/product_info_page.dart';
 import 'package:e_commerce/modules/store/store_page.dart';
@@ -208,6 +210,18 @@ final router = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: ProfilePage.path,name: ProfilePage.path,
+            builder: (context, state) => ProfilePage(),
+            routes: [
+              GoRoute(path: OrdersPage.path,
+              name: OrdersPage.path,
+              builder: (context, state) => OrdersPage(),
+              )
+            ]
+          )
+        ])
       ],
     ),
   ],

@@ -24,6 +24,7 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final size = MediaQuery.of(context).size;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -132,11 +133,15 @@ class CategoryPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       itemCount: state.products.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 26,
+                        // crossAxisCount: 3,
+                        crossAxisCount: (size.width / 170).floor(),
+
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 25,
+                        mainAxisExtent: 280,
+                        // childAspectRatio:1/2
                         // mainAxisExtent: MediaQuery.of(context).size.height * 0.43,
-                        childAspectRatio: 1.1 / 2,
+                        // childAspectRatio: 1.5 / 2,
                       ),
                       itemBuilder: (context, index) {
                         return ProductCard(

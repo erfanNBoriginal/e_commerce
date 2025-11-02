@@ -37,7 +37,7 @@ class StrorePage extends StatelessWidget {
             return Scaffold(
               backgroundColor: U.Theme.background,
               body: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0),
                 child: ListView(
                   children: [
                     StoreBanner(),
@@ -79,7 +79,9 @@ class StrorePage extends StatelessWidget {
                     //   ),
                     //   //  type: Type.sale,
                     // ),
-                    SizedBox(
+                   state .loading ? Center(
+                     child: CircularProgressIndicator(),
+                   ): SizedBox(
                       height: 289,
                       child: ListView.separated(
                         padding: EdgeInsets.all(7),
@@ -109,7 +111,7 @@ class StrorePage extends StatelessWidget {
                       color: U.Theme.gray,
                     ),
                     SizedBox(height: 22),
-                    SizedBox(
+               state .loading ? Center(child: CircularProgressIndicator()):     SizedBox(
                       height: 289,
                       child: ListView.separated(
                         padding: EdgeInsets.all(7),

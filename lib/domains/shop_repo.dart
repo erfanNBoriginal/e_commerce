@@ -367,7 +367,7 @@ class ShopRepo {
 
   Future<List<String>> getAllCategories() async {
     await Future.delayed(Duration(milliseconds: 100));
-    return ['women', 'men', 'boys', 'girls'];
+    return ['زنانه', 'مردانه', 'پسرانه', ];
   }
 
   Future<List<String>> getBrands() async {
@@ -415,9 +415,21 @@ class ShopRepo {
         products.sort((a, b) => b.getRating.compareTo(a.getRating));
       }
     }
-
+print('category');
+print(category);
     if (category != null) {
-      products = products.where((e) => e.category == category).toList();
+      products = products.where((e){
+// print('e.category == category');
+// print(e.category == category);
+print('e.category');
+print(e.category);
+print('category');
+print(category);
+return
+e.category == category;
+      } ).toList();
+      print('products.length====================');
+      print(products.length);
     }
 
     if (colors != null && colors.isNotEmpty) {

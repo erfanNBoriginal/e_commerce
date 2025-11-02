@@ -45,22 +45,30 @@ class OutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(bordeRaius),
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: border.color, width: border.width),
-          borderRadius: BorderRadius.circular(bordeRaius),
-        ),
-        height: _size,
-        // width: width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            U.Text(title, color: border.color),
-            if (trailing != null) trailing!,
-          ],
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(bordeRaius),
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: border.color, width: border.width),
+            borderRadius: BorderRadius.circular(bordeRaius),
+          ),
+          height: _size,
+          // width: width,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0,),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  U.Text(title, color: border.color),
+                  if (trailing != null) trailing!,
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

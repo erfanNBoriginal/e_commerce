@@ -37,17 +37,21 @@ class BagPage extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               backgroundColor: U.Theme.background,
-              body: Column(
+              body:
+               Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   U.AppBar(havElevation: false, back: false),
                   SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: U.Text(
-                      'سبد خرید',
-                      fontSize: U.TextSize.s34,
-                      weight: U.TextWeight.bold,
+                  Align(
+                    alignment:AlignmentGeometry.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: U.Text(
+                        'سبد خرید',
+                        fontSize: U.TextSize.s34,
+                        weight: U.TextWeight.bold,
+                      ),
                     ),
                   ),
                   SizedBox(height: 24),

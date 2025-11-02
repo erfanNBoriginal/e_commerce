@@ -46,17 +46,17 @@ class Button extends StatelessWidget {
           borderRadius: BorderRadius.circular(bordeRaius),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 9.0),
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (leading != null) leading!,
-                  SizedBox(width: 5),
+                  if (leading != null) ...[leading!,  SizedBox(width: 5),],
+                
                   U.Text(
                     color: U.Theme.white,
                     title,
-                    weight: U.TextWeight.regular,
+                    weight: U.TextWeight.medium,
                   ),
                 ],
               ),

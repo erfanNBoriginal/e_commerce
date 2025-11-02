@@ -33,7 +33,9 @@ class CategoryFilterDialog extends StatelessWidget {
               children: [
                 ListView(
                   children: [
-                    U.AppBar(title: 'filters'),
+                    Hero(
+                       tag: 1,
+                       child: U.AppBar(title: 'filters')),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 14.0,
@@ -164,8 +166,6 @@ class CategoryFilterDialog extends StatelessWidget {
                         ),
                         padding: const EdgeInsets.all(16),
                         itemBuilder: (context, index) {
-                          // print('MediaQuery.of(context).size.width');
-                          // print(MediaQuery.of(context).size.width);
                           if (index == state.categories.length) {
                             return state.selectedCategory != ''
                                 ? NotSelectedButton(

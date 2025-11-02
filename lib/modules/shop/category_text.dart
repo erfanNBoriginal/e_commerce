@@ -14,26 +14,34 @@ class CategoryText extends StatelessWidget {
       onTap: () {
         GoRouter.of(context).goNamed(
           extra: category,
-
           CategoryPage.path,
           pathParameters: {'id': category.id.toString()},
         );
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: U.Text(
-              category.title,
-              fontSize: U.TextSize.s16,
-              weight: U.TextWeight.regular,
+      child: SizedBox(
+        height: 64,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Hero(
+                tag: 1,
+                child: U.Text(
+                  category.title,
+                  fontSize: U.TextSize.s16,
+                  weight: U.TextWeight.regular,
+                ),
+              ),
             ),
-          ),
-          SizedBox(height: 17),
-          Divider(thickness: 0.4, color: U.Theme.gray),
-        ],
+            // Expanded(child: Spacer(flex: 1,)),
+            // SizedBox(height: 17),
+            // Divider( color: U.Theme.gray),
+          
+          ],
+        ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'dart:ui';
 // enum Radius { r25, r29 }
 abstract class Theme {
   static const primary = Color(0XFFDB3022);
+  static const success = Color(0XFF2AA952);
   static const background = Color(0XFFF9F9F9);
   static const white = Color(0XFFFFFFFF);
   static const black = Color(0XFF222222);

@@ -63,6 +63,14 @@ class HomeShell extends StatelessWidget {
 
                             title: 'علاقه مندی ها',
                           ),
+                            U.NavigationBarItem(
+                            // onTap: () {},
+                            size: 30,
+                            notActivePath: U.Icons.profile,
+                            activePath: U.Icons.profileActive,
+                            title: 'profile',
+                            // isSelected: page.currentIndex == 1,
+                          ),
                         ],
                       );
                     },

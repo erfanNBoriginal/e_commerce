@@ -47,11 +47,7 @@ class FavoritesPage extends StatelessWidget {
                   havElevation: false,
                   title: 'Favorites'),
                   SizedBox(height: 5),
-                  state.loading
-                      ? Expanded(
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                      : Container(
+                 Container(
                          padding: const EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 16.0),
@@ -100,7 +96,11 @@ class FavoritesPage extends StatelessWidget {
                         ),
                       ),
                   SizedBox(height: 15),
-
+                        state.loading
+                      ? Expanded(flex: 33,
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                      : 
                   Expanded(
                     child: GridView.builder(
                       padding: EdgeInsets.symmetric(horizontal: 16),

@@ -16,11 +16,14 @@ class ShopPage extends StatelessWidget {
       child: BlocBuilder<ShopCubit, ShopState>(
         builder: (context, state) {
           return ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               U.AppBar(back: false, title: 'دسته بندی ها'),
               SizedBox(height: 16),
-              Padding(
+             if(state.loading) SizedBox(
+              height: MediaQuery.of(context).size.height - 88,
+              child: Center(child: CircularProgressIndicator()))
+              else
+             ...[Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: U.Button(
                   title: 'مشاهده همه آیتم ها',
@@ -36,8 +39,14 @@ class ShopPage extends StatelessWidget {
                 child: U.Text('دسته بندی انتخاب کن', color: U.Theme.gray),
               ),
               SizedBox(height: 17),
-              ...state.categories.map((e) => CategoryText(category: e)),
-              SizedBox(height: 111),
+              ...state.categories.expand((e) =>[
+                 CategoryText(category: e),
+                   Container(
+              color: U.Theme.gray,height: 0.2,
+            width: double.infinity,
+            )
+                 ]),
+              SizedBox(height: 111),]
               // SizedBox(
               //   height: 482,
               //   child: ListView.builder(

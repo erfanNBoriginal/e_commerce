@@ -1,12 +1,16 @@
 import 'package:e_commerce/domains/checkout_repo.dart';
 import 'package:e_commerce/domains/models/bag_item.dart';
+import 'package:e_commerce/domains/models/order.dart';
+import 'package:e_commerce/domains/settings_repo.dart';
 import 'package:e_commerce/modules/checkout/bank_cards.dart';
 import 'package:e_commerce/modules/checkout/card_btms.dart';
 import 'package:e_commerce/modules/checkout/cubit/checkout_cubit.dart';
 import 'package:e_commerce/modules/checkout/shipping_address_dialog.dart';
+import 'package:e_commerce/modules/profile/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/ui_kit.dart/ui_kit.dart' as U;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 class CheckoutPage extends StatelessWidget {
 
 static final path = '/checkout';
@@ -19,10 +23,16 @@ static final path = '/checkout';
     print(bagItems?.length);
     return Scaffold(
       backgroundColor: U.Theme.background,
-      body: BlocProvider(
-        create:(context) =>  CheckoutCubit(
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context)=>   CheckoutCubit(
           products: bagItems,
-          repo: context.read<CheckoutRepo>()),
+          repo: context.read<CheckoutRepo>()),),
+          
+          BlocProvider(create: (context)=> SettingsCubit(
+            repo: context.read<SettingsRepo>()) )
+
+        ],
         child: BlocBuilder<CheckoutCubit,CheckoutState>(
           builder:  (context,state) {
           return
@@ -214,11 +224,45 @@ static final path = '/checkout';
                         ],
                       ),
                       SizedBox(height:23 ,),
-                      U.Button(title: 'Submit Order',
-                       size: U.ButtonSize.l,
-                        onTap: (){},
-                         bordeRaius: U.Theme.r25,
-                          color: U.Theme.primary)
+                      BlocBuilder<SettingsCubit,SettingsState>(
+                        builder: (context,settingsState) {
+                          return settingsState.loading ?
+                           CircularProgressIndicator():
+                            U.Button(title: 'Submit Order',
+                           size: U.ButtonSize.l,
+                            onTap: (){
+                              if(state.selectedAddress != null &&
+                              state.selectedCard != null  &&
+                              state.selectedDeliveryMethod != null
+                              )
+                              {
+                                print('state.selectedDeliveryMethod');
+                                print(state.selectedDeliveryMethod);
+                                print('state.selectedAddress');
+                                print(state.selectedAddress);
+                                print('state.selectedCard');
+                                print(state.selectedCard);
+                                print('shiiiit');
+                                context.read<SettingsCubit>().onSubmitted(
+                                Order(
+                                  orderStatus: OrderStatus.processing,
+                                  products: state.bagItems,
+                                  trackingNumber: '131231wq',
+                                   date: '2025/2/22',
+                                 address: state.selectedAddress!,
+                                  bankCard: state.selectedCard!,
+                                   discount: null,
+                                  totalAmount: state.getTotal,
+                                 delivery: state.selectedDeliveryMethod!)
+                              );}else{
+                                print('fffffffffffuc');
+                                toast('fill null parameters');
+                              }
+                            },
+                             bordeRaius: U.Theme.r25,
+                              color: U.Theme.primary);
+                        }
+                      )
                                    ],
                      )
                                 
